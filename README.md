@@ -1,4 +1,4 @@
-xml-doclet
-==========
+A doclet to output javadoc as XML
+=================================
 
-Javadoc to XML
+This library provides a doclet to convert javadoc comments from java-source code into an XML representation. 

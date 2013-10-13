@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:complexType name="root">
+		<xs:sequence>
+			<xs:element name="packages" type="package" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="package">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="annotations" type="annotation" nillable="true"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="enums" type="enum" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="interfaces" type="interface" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="classes" type="class" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="exceptions" type="exception" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="annotation">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="enum">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="interface">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="class">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="exception">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
