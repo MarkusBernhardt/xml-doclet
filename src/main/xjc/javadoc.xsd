@@ -12,15 +12,13 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="annotations" type="annotation" nillable="true"
+			<xs:element name="annotations" type="annotation"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="enums" type="enum" minOccurs="0"
 				maxOccurs="unbounded" />
 			<xs:element name="interfaces" type="interface" minOccurs="0"
 				maxOccurs="unbounded" />
 			<xs:element name="classes" type="class" minOccurs="0"
-				maxOccurs="unbounded" />
-			<xs:element name="exceptions" type="exception" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
@@ -107,7 +105,7 @@
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
 			<xs:element name="isIncluded" type="xs:boolean" />
-			<xs:element name="generics" type="genericTypeVariable"
+			<xs:element name="generics" type="typeParameter"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="extends" type="xs:string" minOccurs="0"
 				maxOccurs="unbounded" />
@@ -119,11 +117,6 @@
 	</xs:complexType>
 
 	<xs:complexType name="class">
-		<xs:sequence>
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="exception">
 		<xs:sequence>
 		</xs:sequence>
 	</xs:complexType>
@@ -145,37 +138,47 @@
 			<xs:element name="signature" type="xs:string" minOccurs="0" />
 			<xs:element name="parameters" type="methodParameter"
 				minOccurs="0" maxOccurs="unbounded" />
-			<!-- <xs:element name="result" type="result" minOccurs="0" /> <xs:element 
-				name="exceptions" type="exceptionInstance" nillable="true" minOccurs="0" 
-				maxOccurs="unbounded" /> <xs:element name="annotationInstances" type="annotationInstance" 
-				nillable="true" minOccurs="0" maxOccurs="unbounded" /> -->
+			<xs:element name="return" type="typeInfo" minOccurs="0" />
+			<xs:element name="throws" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="methodParameter">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="type" type="methodParameterType"
-				minOccurs="0" />
+			<xs:element name="type" type="typeInfo" minOccurs="0" />
 			<xs:element name="annotations" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="methodParameterType">
+	<xs:complexType name="typeInfo">
 		<xs:sequence>
 			<xs:element name="qualifiedName" type="xs:string"
 				minOccurs="0" />
-			<!-- <xs:element name="wildcard" type="wildCardInfo" minOccurs="0"/> <xs:element 
-				name="generics" type="genericsInfo" minOccurs="0"/> -->
+			<xs:element name="wildcard" type="wildcard" minOccurs="0" />
+			<xs:element name="generics" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
 			<xs:element name="dimension" type="xs:string" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="genericTypeVariable">
+	<xs:complexType name="typeParameter">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" minOccurs="0" />
 			<xs:element name="bounds" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="wildcard">
+		<xs:sequence>
+			<xs:element name="extendsBounds" type="typeInfo"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="superBounds" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
