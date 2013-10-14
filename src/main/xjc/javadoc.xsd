@@ -74,11 +74,47 @@
 
 	<xs:complexType name="enum">
 		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="xs:string" minOccurs="0" />
+			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="extends" type="xs:string" minOccurs="0" />
+			<xs:element name="implements" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="constants" type="enumConstant"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="enumConstant">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="interface">
 		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="xs:string" minOccurs="0" />
+			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="generics" type="genericTypeVariable"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="extends" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="methods" type="method" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -89,6 +125,58 @@
 
 	<xs:complexType name="exception">
 		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="method">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="xs:string" minOccurs="0" />
+			<xs:element name="isAbstract" type="xs:boolean" />
+			<xs:element name="isFinal" type="xs:boolean" />
+			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="isNative" type="xs:boolean" />
+			<xs:element name="isSynchronized" type="xs:boolean" />
+			<xs:element name="isStatic" type="xs:boolean" />
+			<xs:element name="isVarArgs" type="xs:boolean" />
+			<xs:element name="signature" type="xs:string" minOccurs="0" />
+			<xs:element name="parameters" type="methodParameter"
+				minOccurs="0" maxOccurs="unbounded" />
+			<!-- <xs:element name="result" type="result" minOccurs="0" /> <xs:element 
+				name="exceptions" type="exceptionInstance" nillable="true" minOccurs="0" 
+				maxOccurs="unbounded" /> <xs:element name="annotationInstances" type="annotationInstance" 
+				nillable="true" minOccurs="0" maxOccurs="unbounded" /> -->
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="methodParameter">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="type" type="methodParameterType"
+				minOccurs="0" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="methodParameterType">
+		<xs:sequence>
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<!-- <xs:element name="wildcard" type="wildCardInfo" minOccurs="0"/> <xs:element 
+				name="generics" type="genericsInfo" minOccurs="0"/> -->
+			<xs:element name="dimension" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="genericTypeVariable">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="bounds" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
