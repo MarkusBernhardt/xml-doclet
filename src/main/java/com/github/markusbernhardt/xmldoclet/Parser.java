@@ -10,8 +10,11 @@ import com.github.markusbernhardt.xmldoclet.xjc.Annotation;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationArgument;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationElement;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationInstance;
+import com.github.markusbernhardt.xmldoclet.xjc.Class;
+import com.github.markusbernhardt.xmldoclet.xjc.Constructor;
 import com.github.markusbernhardt.xmldoclet.xjc.Enum;
 import com.github.markusbernhardt.xmldoclet.xjc.EnumConstant;
+import com.github.markusbernhardt.xmldoclet.xjc.Field;
 import com.github.markusbernhardt.xmldoclet.xjc.Interface;
 import com.github.markusbernhardt.xmldoclet.xjc.Method;
 import com.github.markusbernhardt.xmldoclet.xjc.MethodParameter;
@@ -25,6 +28,7 @@ import com.sun.javadoc.AnnotationTypeDoc;
 import com.sun.javadoc.AnnotationTypeElementDoc;
 import com.sun.javadoc.AnnotationValue;
 import com.sun.javadoc.ClassDoc;
+import com.sun.javadoc.ConstructorDoc;
 import com.sun.javadoc.FieldDoc;
 import com.sun.javadoc.MethodDoc;
 import com.sun.javadoc.PackageDoc;
@@ -67,11 +71,8 @@ public class Parser {
 				packageNode.getEnums().add(parseEnum(classDoc));
 			} else if (classDoc.isInterface()) {
 				packageNode.getInterfaces().add(parseInterface(classDoc));
-			} else if (classDoc.isOrdinaryClass() || classDoc.isException() || classDoc.isError()) {
-				// TODO
-				// mediary.addClass(ParseClass(classDoc));
 			} else {
-				// TODO
+				packageNode.getClasses().add(parseClass(classDoc));
 			}
 		}
 
@@ -182,11 +183,11 @@ public class Parser {
 
 		Type superClassType = classDoc.superclassType();
 		if (superClassType != null) {
-			enumNode.setExtends(superClassType.qualifiedTypeName());
+			enumNode.setExtends(parseTypeInfo(superClassType));
 		}
 
 		for (Type interfaceType : classDoc.interfaceTypes()) {
-			enumNode.getImplements().add(interfaceType.qualifiedTypeName());
+			enumNode.getImplements().add(parseTypeInfo(interfaceType));
 		}
 
 		for (FieldDoc field : classDoc.enumConstants()) {
@@ -220,30 +221,106 @@ public class Parser {
 
 	protected Interface parseInterface(ClassDoc classDoc) {
 
-		Interface interfaceMode = new Interface();
-		interfaceMode.setName(classDoc.name());
-		interfaceMode.setQualifiedName(classDoc.qualifiedName());
-		interfaceMode.setComment(classDoc.commentText());
-		interfaceMode.setIsIncluded(classDoc.isIncluded());
-		interfaceMode.setScope(parseScope(classDoc));
+		Interface interfaceNode = new Interface();
+		interfaceNode.setName(classDoc.name());
+		interfaceNode.setQualifiedName(classDoc.qualifiedName());
+		interfaceNode.setComment(classDoc.commentText());
+		interfaceNode.setIsIncluded(classDoc.isIncluded());
+		interfaceNode.setScope(parseScope(classDoc));
 
 		for (TypeVariable typeVariable : classDoc.typeParameters()) {
-			interfaceMode.getGenerics().add(parseTypeParameter(typeVariable));
+			interfaceNode.getGenerics().add(parseTypeParameter(typeVariable));
 		}
 
 		for (Type interfaceType : classDoc.interfaceTypes()) {
-			interfaceMode.getExtends().add(interfaceType.qualifiedTypeName());
+			interfaceNode.getExtends().add(parseTypeInfo(interfaceType));
 		}
 
 		for (MethodDoc method : classDoc.methods()) {
-			interfaceMode.getMethods().add(parseMethod(method));
+			interfaceNode.getMethods().add(parseMethod(method));
 		}
 
 		for (AnnotationDesc annotationDesc : classDoc.annotations()) {
-			interfaceMode.getAnnotations().add(parseAnnotationDesc(annotationDesc, classDoc.qualifiedName()));
+			interfaceNode.getAnnotations().add(parseAnnotationDesc(annotationDesc, classDoc.qualifiedName()));
 		}
 
-		return interfaceMode;
+		return interfaceNode;
+	}
+
+	protected Class parseClass(ClassDoc classDoc) {
+
+		Class classNode = new Class();
+		classNode.setName(classDoc.name());
+		classNode.setQualifiedName(classDoc.qualifiedName());
+		classNode.setComment(classDoc.commentText());
+		classNode.setIsAbstract(classDoc.isAbstract());
+		classNode.setIsError(classDoc.isError());
+		classNode.setIsException(classDoc.isException());
+		classNode.setIsExternalizable(classDoc.isExternalizable());
+		classNode.setIsIncluded(classDoc.isIncluded());
+		classNode.setIsSerializable(classDoc.isSerializable());
+		classNode.setScope(parseScope(classDoc));
+
+		for (TypeVariable typeVariable : classDoc.typeParameters()) {
+			classNode.getGenerics().add(parseTypeParameter(typeVariable));
+		}
+
+		Type superClassType = classDoc.superclassType();
+		if (superClassType != null) {
+			classNode.setExtends(parseTypeInfo(superClassType));
+		}
+
+		for (Type interfaceType : classDoc.interfaceTypes()) {
+			classNode.getImplements().add(parseTypeInfo(interfaceType));
+		}
+
+		for (MethodDoc method : classDoc.methods()) {
+			classNode.getMethods().add(parseMethod(method));
+		}
+
+		for (AnnotationDesc annotationDesc : classDoc.annotations()) {
+			classNode.getAnnotations().add(parseAnnotationDesc(annotationDesc, classDoc.qualifiedName()));
+		}
+
+		for (ConstructorDoc constructor : classDoc.constructors()) {
+			classNode.getConstructors().add(parseConstructor(constructor));
+		}
+
+		for (FieldDoc field : classDoc.fields()) {
+			classNode.getFields().add(parseField(field));
+		}
+
+		return classNode;
+	}
+
+	protected Constructor parseConstructor(ConstructorDoc constructorDoc) {
+		Constructor constructorNode = new Constructor();
+
+		constructorNode.setName(constructorDoc.name());
+		constructorNode.setQualifiedName(constructorDoc.qualifiedName());
+		constructorNode.setComment(constructorDoc.commentText());
+		constructorNode.setScope(parseScope(constructorDoc));
+		constructorNode.setIsIncluded(constructorDoc.isIncluded());
+		constructorNode.setIsFinal(constructorDoc.isFinal());
+		constructorNode.setIsNative(constructorDoc.isNative());
+		constructorNode.setIsStatic(constructorDoc.isStatic());
+		constructorNode.setIsSynchronized(constructorDoc.isSynchronized());
+		constructorNode.setIsVarArgs(constructorDoc.isVarArgs());
+		constructorNode.setSignature(constructorDoc.signature());
+
+		for (Parameter parameter : constructorDoc.parameters()) {
+			constructorNode.getParameters().add(parseMethodParameter(parameter));
+		}
+
+		for (Type exceptionType : constructorDoc.thrownExceptionTypes()) {
+			constructorNode.getThrows().add(parseTypeInfo(exceptionType));
+		}
+
+		for (AnnotationDesc annotationDesc : constructorDoc.annotations()) {
+			constructorNode.getAnnotations().add(parseAnnotationDesc(annotationDesc, constructorDoc.qualifiedName()));
+		}
+
+		return constructorNode;
 	}
 
 	protected Method parseMethod(MethodDoc methodDoc) {
@@ -288,6 +365,26 @@ public class Parser {
 		}
 
 		return parameterMethodNode;
+	}
+
+	protected Field parseField(FieldDoc fieldDoc) {
+		Field fieldNode = new Field();
+		fieldNode.setType(parseTypeInfo(fieldDoc.type()));
+		fieldNode.setName(fieldDoc.name());
+		fieldNode.setQualifiedName(fieldDoc.qualifiedName());
+		fieldNode.setComment(fieldDoc.commentText());
+		fieldNode.setScope(parseScope(fieldDoc));
+		fieldNode.setIsFinal(fieldDoc.isFinal());
+		fieldNode.setIsStatic(fieldDoc.isStatic());
+		fieldNode.setIsVolatile(fieldDoc.isVolatile());
+		fieldNode.setIsTransient(fieldDoc.isTransient());
+		fieldNode.setConstant(fieldDoc.constantValueExpression());
+
+		for (AnnotationDesc annotationDesc : fieldDoc.annotations()) {
+			fieldNode.getAnnotations().add(parseAnnotationDesc(annotationDesc, fieldDoc.qualifiedName()));
+		}
+
+		return fieldNode;
 	}
 
 	protected TypeInfo parseTypeInfo(Type type) {

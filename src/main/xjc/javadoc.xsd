@@ -78,8 +78,8 @@
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
 			<xs:element name="isIncluded" type="xs:boolean" />
-			<xs:element name="extends" type="xs:string" minOccurs="0" />
-			<xs:element name="implements" type="xs:string" minOccurs="0"
+			<xs:element name="extends" type="typeInfo" minOccurs="0" />
+			<xs:element name="implements" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
 			<xs:element name="constants" type="enumConstant"
 				minOccurs="0" maxOccurs="unbounded" />
@@ -107,7 +107,7 @@
 			<xs:element name="isIncluded" type="xs:boolean" />
 			<xs:element name="generics" type="typeParameter"
 				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="extends" type="xs:string" minOccurs="0"
+			<xs:element name="extends" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
 			<xs:element name="methods" type="method" minOccurs="0"
 				maxOccurs="unbounded" />
@@ -118,6 +118,53 @@
 
 	<xs:complexType name="class">
 		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="xs:string" minOccurs="0" />
+			<xs:element name="isAbstract" type="xs:boolean" />
+			<xs:element name="isError" type="xs:boolean" />
+			<xs:element name="isException" type="xs:boolean" />
+			<xs:element name="isExternalizable" type="xs:boolean" />
+			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="isSerializable" type="xs:boolean" />
+			<xs:element name="generics" type="typeParameter"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="extends" type="typeInfo" minOccurs="0" />
+			<xs:element name="implements" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="constructors" type="constructor"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="methods" type="method" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="fields" type="field" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="constructor">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="xs:string" minOccurs="0" />
+			<xs:element name="isFinal" type="xs:boolean" />
+			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="isNative" type="xs:boolean" />
+			<xs:element name="isSynchronized" type="xs:boolean" />
+			<xs:element name="isStatic" type="xs:boolean" />
+			<xs:element name="isVarArgs" type="xs:boolean" />
+			<xs:element name="signature" type="xs:string" minOccurs="0" />
+			<xs:element name="parameters" type="methodParameter"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="throws" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -150,6 +197,24 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" minOccurs="0" />
 			<xs:element name="type" type="typeInfo" minOccurs="0" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="field">
+		<xs:sequence>
+			<xs:element name="type" type="typeInfo" minOccurs="0" />
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="xs:string" minOccurs="0" />
+			<xs:element name="isVolatile" type="xs:boolean" />
+			<xs:element name="isTransient" type="xs:boolean" />
+			<xs:element name="isStatic" type="xs:boolean" />
+			<xs:element name="isFinal" type="xs:boolean" />
+			<xs:element name="constant" type="xs:string" minOccurs="0" />
 			<xs:element name="annotations" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
