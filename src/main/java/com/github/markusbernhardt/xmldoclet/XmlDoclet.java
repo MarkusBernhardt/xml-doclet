@@ -19,7 +19,7 @@ public class XmlDoclet {
 	 */
 	public static boolean start(RootDoc rootDoc) {
 		Parser parser = new Parser();
-		Root root = parser.parseRoot(rootDoc);
+		Root root = parser.parseRootDoc(rootDoc);
 
 		// TODO
 		// Save the output XML

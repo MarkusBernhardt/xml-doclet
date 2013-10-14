@@ -27,6 +27,48 @@
 
 	<xs:complexType name="annotation">
 		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="scope" type="scope" minOccurs="0" />
+			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="elements" type="annotationElement"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="annotations" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="annotationElement">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="type" type="xs:string" minOccurs="0" />
+			<xs:element name="defaultValue" type="xs:string"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="annotationInstance">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="qualifiedName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="arguments" type="annotationArgument"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="annotationArgument">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="value" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="type" type="xs:string" minOccurs="0" />
+			<xs:element name="isPrimitive" type="xs:boolean" />
+			<xs:element name="isArray" type="xs:boolean" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -49,5 +91,14 @@
 		<xs:sequence>
 		</xs:sequence>
 	</xs:complexType>
+
+	<xs:simpleType name="scope">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="public" />
+			<xs:enumeration value="protected" />
+			<xs:enumeration value="private" />
+			<xs:enumeration value="" />
+		</xs:restriction>
+	</xs:simpleType>
 
 </xs:schema>
