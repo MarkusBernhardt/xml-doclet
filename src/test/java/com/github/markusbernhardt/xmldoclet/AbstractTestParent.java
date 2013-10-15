@@ -161,8 +161,6 @@ public class AbstractTestParent {
 
 	private static class LoggingOutputStream extends java.io.OutputStream {
 
-		protected static final String LINE_SEPERATOR = System.getProperty("line.separator");
-
 		protected Logger log;
 		protected LoggingLevelEnum loggingLevel;
 
@@ -174,25 +172,7 @@ public class AbstractTestParent {
 		/**
 		 * The internal buffer where data is stored.
 		 */
-		protected byte[] buffer;
-
-		/**
-		 * The number of valid bytes in the buffer. This value is always in the
-		 * range <tt>0</tt> through <tt>buf.length</tt>; elements
-		 * <tt>buf[0]</tt> through <tt>buf[count-1]</tt> contain valid byte
-		 * data.
-		 */
-		protected int count;
-
-		/**
-		 * Remembers the size of the buffer for speed.
-		 */
-		private int bufferLength;
-
-		/**
-		 * The default number of bytes in the buffer. =2048
-		 */
-		public static final int DEFAULT_BUFFER_LENGTH = 2048;
+		protected StringBuffer buffer = new StringBuffer();
 
 		/**
 		 * Creates the LoggingOutputStream to flush to the given Category.
@@ -213,9 +193,6 @@ public class AbstractTestParent {
 
 			this.loggingLevel = loggingLevel;
 			this.log = log;
-			bufferLength = DEFAULT_BUFFER_LENGTH;
-			buffer = new byte[DEFAULT_BUFFER_LENGTH];
-			count = 0;
 		}
 
 		/**
@@ -246,25 +223,14 @@ public class AbstractTestParent {
 				throw new IOException("The stream has been closed.");
 			}
 
-			// don't log nulls
-			if (b == 0) {
-				return;
+			byte[] bytes = new byte[1];
+			bytes[0] = (byte) (b & 0xff);
+			String s = new String(bytes);
+			if (s.equals("\n")) {
+				flush();
+			} else {
+				buffer.append(s);
 			}
-
-			// would this be writing past the buffer?
-			if (count == bufferLength) {
-				// grow the buffer
-				final int newBufLength = bufferLength + DEFAULT_BUFFER_LENGTH;
-				final byte[] newBuf = new byte[newBufLength];
-
-				System.arraycopy(buffer, 0, newBuf, 0, bufferLength);
-
-				buffer = newBuf;
-				bufferLength = newBufLength;
-			}
-
-			buffer[count] = (byte) b;
-			count++;
 		}
 
 		/**
@@ -276,39 +242,15 @@ public class AbstractTestParent {
 		 */
 		@Override
 		public void flush() {
-
-			if (count == 0) {
-				return;
+			String message = buffer.toString().trim();
+			if (message.length() > 0) {
+				loggingLevel.log(log, message);
 			}
-
-			// don't print out blank lines; flushing from PrintStream puts out
-			// these
-			if (count == LINE_SEPERATOR.length()) {
-				if (((char) buffer[0]) == LINE_SEPERATOR.charAt(0) && ((count == 1) || // <-
-																						// Unix
-																						// &
-																						// Mac,
-																						// ->
-																						// Windows
-						((count == 2) && ((char) buffer[1]) == LINE_SEPERATOR.charAt(1)))) {
-					reset();
-					return;
-				}
-			}
-
-			final byte[] theBytes = new byte[count];
-
-			System.arraycopy(buffer, 0, theBytes, 0, count);
-
-			loggingLevel.log(log, new String(theBytes));
-
 			reset();
 		}
 
 		private void reset() {
-			// not resetting the buffer -- assuming that if it grew that it
-			// will likely grow similarly again
-			count = 0;
+			buffer = new StringBuffer();
 		}
 	}
 }
