@@ -1,11 +1,34 @@
 package com.github.markusbernhardt.xmldoclet;
 
 import com.github.markusbernhardt.xmldoclet.xjc.Root;
+import com.sun.javadoc.DocErrorReporter;
 import com.sun.javadoc.LanguageVersion;
 import com.sun.javadoc.RootDoc;
 
 public class XmlDoclet {
-	/**
+    /**
+     * Check that options have the correct arguments.
+     *
+     * <p>This method is not required, but is recommended, as every option will be considered valid
+     * if this method is not present. It will default gracefully (to true) if absent.
+     *
+     * <p>Printing option related error messages (using the provided DocErrorReporter) is the
+     * responsibility of this method.
+     *
+     * @see com.sun.javadoc.Doclet#validOptions(String[][], DocErrorReporter)
+     *
+     * @param options The two dimensional array of options.
+     * @param reporter The error reporter.
+     *
+     * @return <code>true</code> if the options are valid.
+     */
+    public static boolean validOptions(String o[][], DocErrorReporter reporter) {
+      options = Options.toOptions(o, reporter);
+      // OK if we could set up the options.
+      return options != null;
+    }
+
+    /**
 	 * Processes the JavaDoc documentation.
 	 * <p>
 	 * This method is required for all doclets.
