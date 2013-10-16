@@ -18,6 +18,7 @@ import com.github.markusbernhardt.xmldoclet.xjc.Field;
 import com.github.markusbernhardt.xmldoclet.xjc.Interface;
 import com.github.markusbernhardt.xmldoclet.xjc.Method;
 import com.github.markusbernhardt.xmldoclet.xjc.MethodParameter;
+import com.github.markusbernhardt.xmldoclet.xjc.ObjectFactory;
 import com.github.markusbernhardt.xmldoclet.xjc.Package;
 import com.github.markusbernhardt.xmldoclet.xjc.Root;
 import com.github.markusbernhardt.xmldoclet.xjc.TypeInfo;
@@ -46,6 +47,8 @@ public class Parser {
 
 	protected Map<PackageDoc, Package> packages = new TreeMap<PackageDoc, Package>();
 
+	protected ObjectFactory objectFactory = new ObjectFactory();
+
 	/**
 	 * The entry point into parsing the javadoc.
 	 * 
@@ -54,15 +57,16 @@ public class Parser {
 	 * @return The root node, containing everything parsed from javadoc doclet
 	 */
 	public Root parseRootDoc(RootDoc rootDoc) {
-		Root rootNode = new Root();
+		Root rootNode = objectFactory.createRoot();
 
 		for (ClassDoc classDoc : rootDoc.classes()) {
 			PackageDoc packageDoc = classDoc.containingPackage();
 
 			Package packageNode = packages.get(packageDoc);
 			if (packageNode == null) {
-				packageNode = new Package();
+				packageNode = objectFactory.createPackage();
 				packages.put(packageDoc, packageNode);
+				rootNode.getPackages().add(packageNode);
 			}
 
 			if (classDoc instanceof AnnotationTypeDoc) {
@@ -89,7 +93,7 @@ public class Parser {
 	protected Annotation parseAnnotationTypeDoc(AnnotationTypeDoc annotationTypeDoc) {
 		log.debug("Parsing annotation " + annotationTypeDoc.qualifiedName());
 
-		Annotation annotationNode = new Annotation();
+		Annotation annotationNode = objectFactory.createAnnotation();
 		annotationNode.setName(annotationTypeDoc.name());
 		annotationNode.setQualifiedName(annotationTypeDoc.qualifiedName());
 		annotationNode.setComment(annotationTypeDoc.commentText());
@@ -115,7 +119,7 @@ public class Parser {
 	 * @return the annotation element node
 	 */
 	protected AnnotationElement parseAnnotationTypeElementDoc(AnnotationTypeElementDoc annotationTypeElementDoc) {
-		AnnotationElement annotationElementNode = new AnnotationElement();
+		AnnotationElement annotationElementNode = objectFactory.createAnnotationElement();
 		annotationElementNode.setName(annotationTypeElementDoc.name());
 		annotationElementNode.setQualifiedName(annotationTypeElementDoc.qualifiedName());
 		annotationElementNode.setType(annotationTypeElementDoc.returnType().qualifiedTypeName());
@@ -135,7 +139,7 @@ public class Parser {
 	 * @return representation of annotations
 	 */
 	protected AnnotationInstance parseAnnotationDesc(AnnotationDesc annotationDesc, String programElement) {
-		AnnotationInstance annotationInstanceNode = new AnnotationInstance();
+		AnnotationInstance annotationInstanceNode = objectFactory.createAnnotationInstance();
 
 		try {
 			AnnotationTypeDoc annotTypeInfo = annotationDesc.annotationType();
@@ -147,7 +151,7 @@ public class Parser {
 		}
 
 		for (AnnotationDesc.ElementValuePair elementValuesPair : annotationDesc.elementValues()) {
-			AnnotationArgument annotationArgumentNode = new AnnotationArgument();
+			AnnotationArgument annotationArgumentNode = objectFactory.createAnnotationArgument();
 			annotationArgumentNode.setName(elementValuesPair.element().name());
 
 			Type annotationArgumentType = elementValuesPair.element().returnType();
@@ -174,7 +178,7 @@ public class Parser {
 	}
 
 	protected Enum parseEnum(ClassDoc classDoc) {
-		Enum enumNode = new Enum();
+		Enum enumNode = objectFactory.createEnum();
 		enumNode.setName(classDoc.name());
 		enumNode.setQualifiedName(classDoc.qualifiedName());
 		enumNode.setComment(classDoc.commentText());
@@ -208,7 +212,7 @@ public class Parser {
 	 * @return
 	 */
 	protected EnumConstant parseEnumConstant(FieldDoc fieldDoc) {
-		EnumConstant enumConstant = new EnumConstant();
+		EnumConstant enumConstant = objectFactory.createEnumConstant();
 		enumConstant.setName(fieldDoc.name());
 		enumConstant.setComment(fieldDoc.commentText());
 
@@ -221,7 +225,7 @@ public class Parser {
 
 	protected Interface parseInterface(ClassDoc classDoc) {
 
-		Interface interfaceNode = new Interface();
+		Interface interfaceNode = objectFactory.createInterface();
 		interfaceNode.setName(classDoc.name());
 		interfaceNode.setQualifiedName(classDoc.qualifiedName());
 		interfaceNode.setComment(classDoc.commentText());
@@ -249,7 +253,7 @@ public class Parser {
 
 	protected Class parseClass(ClassDoc classDoc) {
 
-		Class classNode = new Class();
+		Class classNode = objectFactory.createClass();
 		classNode.setName(classDoc.name());
 		classNode.setQualifiedName(classDoc.qualifiedName());
 		classNode.setComment(classDoc.commentText());
@@ -294,7 +298,7 @@ public class Parser {
 	}
 
 	protected Constructor parseConstructor(ConstructorDoc constructorDoc) {
-		Constructor constructorNode = new Constructor();
+		Constructor constructorNode = objectFactory.createConstructor();
 
 		constructorNode.setName(constructorDoc.name());
 		constructorNode.setQualifiedName(constructorDoc.qualifiedName());
@@ -324,7 +328,7 @@ public class Parser {
 	}
 
 	protected Method parseMethod(MethodDoc methodDoc) {
-		Method methodNode = new Method();
+		Method methodNode = objectFactory.createMethod();
 
 		methodNode.setName(methodDoc.name());
 		methodNode.setQualifiedName(methodDoc.qualifiedName());
@@ -356,7 +360,7 @@ public class Parser {
 	}
 
 	protected MethodParameter parseMethodParameter(Parameter parameter) {
-		MethodParameter parameterMethodNode = new MethodParameter();
+		MethodParameter parameterMethodNode = objectFactory.createMethodParameter();
 		parameterMethodNode.setName(parameter.name());
 		parameterMethodNode.setType(parseTypeInfo(parameter.type()));
 
@@ -368,7 +372,7 @@ public class Parser {
 	}
 
 	protected Field parseField(FieldDoc fieldDoc) {
-		Field fieldNode = new Field();
+		Field fieldNode = objectFactory.createField();
 		fieldNode.setType(parseTypeInfo(fieldDoc.type()));
 		fieldNode.setName(fieldDoc.name());
 		fieldNode.setQualifiedName(fieldDoc.qualifiedName());
@@ -388,7 +392,7 @@ public class Parser {
 	}
 
 	protected TypeInfo parseTypeInfo(Type type) {
-		TypeInfo typeInfoNode = new TypeInfo();
+		TypeInfo typeInfoNode = objectFactory.createTypeInfo();
 		typeInfoNode.setQualifiedName(type.qualifiedTypeName());
 		typeInfoNode.setDimension(type.dimension());
 
@@ -408,7 +412,7 @@ public class Parser {
 	}
 
 	protected Wildcard parseWildcard(WildcardType wildcard) {
-		Wildcard wildcardNode = new Wildcard();
+		Wildcard wildcardNode = objectFactory.createWildcard();
 
 		for (Type extendType : wildcard.extendsBounds()) {
 			wildcardNode.getExtendsBounds().add(parseTypeInfo(extendType));
@@ -428,7 +432,7 @@ public class Parser {
 	 * @return
 	 */
 	protected TypeParameter parseTypeParameter(TypeVariable typeVariable) {
-		TypeParameter typeParameter = new TypeParameter();
+		TypeParameter typeParameter = objectFactory.createTypeParameter();
 		typeParameter.setName(typeVariable.typeName());
 
 		for (Type bound : typeVariable.bounds()) {

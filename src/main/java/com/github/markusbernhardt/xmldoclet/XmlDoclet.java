@@ -1,10 +1,19 @@
 package com.github.markusbernhardt.xmldoclet;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -34,7 +43,7 @@ public class XmlDoclet {
 	static {
 		options = new Options();
 
-		OptionBuilder.withArgName("directory");
+		OptionBuilder.withArgName("d");
 		OptionBuilder.isRequired(false);
 		OptionBuilder.hasArg();
 		OptionBuilder.withDescription("Destination directory for output file.\nDefault: .");
@@ -46,7 +55,7 @@ public class XmlDoclet {
 		OptionBuilder.withDescription("Name of the output file.\nDefault: javadoc.xml");
 		options.addOption(OptionBuilder.create("filename"));
 
-		OptionBuilder.withArgName("encoding");
+		OptionBuilder.withArgName("docencoding");
 		OptionBuilder.isRequired(false);
 		OptionBuilder.hasArg();
 		OptionBuilder.withDescription("Encoding of the output file.\nDefault: UTF8");
@@ -115,15 +124,63 @@ public class XmlDoclet {
 	 */
 	public static boolean start(RootDoc rootDoc) {
 		CommandLine commandLine = parseCommandLine(rootDoc.options());
-
 		Parser parser = new Parser();
 		Root root = parser.parseRootDoc(rootDoc);
-
-		// TODO
-		// Save the output XML
-		// save(nodes);
-
+		save(commandLine, root);
 		return true;
+	}
+
+	/**
+	 * Save XML object model to a file via JAXB.
+	 * 
+	 * @param commandLine
+	 * @param root
+	 */
+	public static void save(CommandLine commandLine, Root root) {
+		FileOutputStream fileOutputStream = null;
+		BufferedOutputStream bufferedOutputStream = null;
+		try {
+			JAXBContext contextObj = JAXBContext.newInstance(Root.class);
+
+			Marshaller marshaller = contextObj.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			if (commandLine.hasOption("docencoding")) {
+				marshaller.setProperty(Marshaller.JAXB_ENCODING, commandLine.getOptionValue("docencoding"));
+			}
+
+			String filename = "javadoc.xml";
+			if (commandLine.hasOption("filename")) {
+				filename = commandLine.getOptionValue("filename");
+			}
+			if (commandLine.hasOption("d")) {
+				filename = commandLine.getOptionValue("d") + File.separator + filename;
+			}
+
+			fileOutputStream = new FileOutputStream(filename);
+			bufferedOutputStream = new BufferedOutputStream(fileOutputStream, 1024 * 1024);
+
+			marshaller.marshal(root, bufferedOutputStream);
+			bufferedOutputStream.flush();
+			fileOutputStream.flush();
+
+		} catch (JAXBException e) {
+			log.error(e.getMessage(), e);
+		} catch (FileNotFoundException e) {
+			log.error(e.getMessage(), e);
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		} finally {
+			try {
+				if (bufferedOutputStream != null) {
+					bufferedOutputStream.close();
+				}
+				if (fileOutputStream != null) {
+					fileOutputStream.close();
+				}
+			} catch (IOException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
 	}
 
 	/**
