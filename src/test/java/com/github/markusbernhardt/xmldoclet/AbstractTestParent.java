@@ -9,6 +9,8 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.markusbernhardt.xmldoclet.xjc.Root;
+
 public class AbstractTestParent {
 
 	private final static Logger log = LoggerFactory.getLogger(AbstractTestParent.class);
@@ -52,7 +54,7 @@ public class AbstractTestParent {
 	 *            (unless you specify 'bar' as a subpackage, too)
 	 * @return XStream compatible data structure
 	 */
-	public void executeJavadoc(String extendedClassPath, String[] sourcePaths, String[] packages, String[] sourceFiles,
+	public Root executeJavadoc(String extendedClassPath, String[] sourcePaths, String[] packages, String[] sourceFiles,
 			String[] subPackages, String[] additionalArguments) {
 		try {
 			OutputStream errors = new LoggingOutputStream(log, LoggingLevelEnum.ERROR);
@@ -76,16 +78,20 @@ public class AbstractTestParent {
 			argumentList.add("-classpath");
 			argumentList.add(classPath);
 
-			String concatedSourcePaths = join(File.pathSeparator, sourcePaths);
-			if (concatedSourcePaths.length() > 0) {
-				argumentList.add("-sourcepath");
-				argumentList.add(concatedSourcePaths);
+			if (sourcePaths != null) {
+				String concatedSourcePaths = join(File.pathSeparator, sourcePaths);
+				if (concatedSourcePaths.length() > 0) {
+					argumentList.add("-sourcepath");
+					argumentList.add(concatedSourcePaths);
+				}
 			}
 
-			String concatedSubPackages = join(";", subPackages);
-			if (concatedSubPackages.length() > 0) {
-				argumentList.add("-subpackages");
-				argumentList.add(concatedSubPackages);
+			if (subPackages != null) {
+				String concatedSubPackages = join(";", subPackages);
+				if (concatedSubPackages.length() > 0) {
+					argumentList.add("-subpackages");
+					argumentList.add(concatedSubPackages);
+				}
 			}
 
 			if (packages != null) {
@@ -116,6 +122,8 @@ public class AbstractTestParent {
 		} catch (Error e) {
 			log.error("doclet error", e);
 		}
+
+		return XmlDoclet.root;
 	}
 
 	public static String join(String glue, String[] strings) {

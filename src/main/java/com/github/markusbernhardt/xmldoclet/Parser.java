@@ -97,7 +97,7 @@ public class Parser {
 		annotationNode.setName(annotationTypeDoc.name());
 		annotationNode.setQualifiedName(annotationTypeDoc.qualifiedName());
 		annotationNode.setComment(annotationTypeDoc.commentText());
-		annotationNode.setIsIncluded(annotationTypeDoc.isIncluded());
+		annotationNode.setIncluded(annotationTypeDoc.isIncluded());
 		annotationNode.setScope(parseScope(annotationTypeDoc));
 
 		for (AnnotationTypeElementDoc annotationTypeElementDoc : annotationTypeDoc.elements()) {
@@ -156,8 +156,8 @@ public class Parser {
 
 			Type annotationArgumentType = elementValuesPair.element().returnType();
 			annotationArgumentNode.setType(annotationArgumentType.qualifiedTypeName());
-			annotationArgumentNode.setIsPrimitive(annotationArgumentType.isPrimitive());
-			annotationArgumentNode.setIsArray(annotationArgumentType.dimension().length() > 0);
+			annotationArgumentNode.setPrimitive(annotationArgumentType.isPrimitive());
+			annotationArgumentNode.setArray(annotationArgumentType.dimension().length() > 0);
 
 			Object objValue = elementValuesPair.value().value();
 			if (objValue instanceof AnnotationValue[]) {
@@ -182,7 +182,7 @@ public class Parser {
 		enumNode.setName(classDoc.name());
 		enumNode.setQualifiedName(classDoc.qualifiedName());
 		enumNode.setComment(classDoc.commentText());
-		enumNode.setIsIncluded(classDoc.isIncluded());
+		enumNode.setIncluded(classDoc.isIncluded());
 		enumNode.setScope(parseScope(classDoc));
 
 		Type superClassType = classDoc.superclassType();
@@ -229,7 +229,7 @@ public class Parser {
 		interfaceNode.setName(classDoc.name());
 		interfaceNode.setQualifiedName(classDoc.qualifiedName());
 		interfaceNode.setComment(classDoc.commentText());
-		interfaceNode.setIsIncluded(classDoc.isIncluded());
+		interfaceNode.setIncluded(classDoc.isIncluded());
 		interfaceNode.setScope(parseScope(classDoc));
 
 		for (TypeVariable typeVariable : classDoc.typeParameters()) {
@@ -257,12 +257,12 @@ public class Parser {
 		classNode.setName(classDoc.name());
 		classNode.setQualifiedName(classDoc.qualifiedName());
 		classNode.setComment(classDoc.commentText());
-		classNode.setIsAbstract(classDoc.isAbstract());
-		classNode.setIsError(classDoc.isError());
-		classNode.setIsException(classDoc.isException());
-		classNode.setIsExternalizable(classDoc.isExternalizable());
-		classNode.setIsIncluded(classDoc.isIncluded());
-		classNode.setIsSerializable(classDoc.isSerializable());
+		classNode.setAbstract(classDoc.isAbstract());
+		classNode.setError(classDoc.isError());
+		classNode.setException(classDoc.isException());
+		classNode.setExternalizable(classDoc.isExternalizable());
+		classNode.setIncluded(classDoc.isIncluded());
+		classNode.setSerializable(classDoc.isSerializable());
 		classNode.setScope(parseScope(classDoc));
 
 		for (TypeVariable typeVariable : classDoc.typeParameters()) {
@@ -304,12 +304,12 @@ public class Parser {
 		constructorNode.setQualifiedName(constructorDoc.qualifiedName());
 		constructorNode.setComment(constructorDoc.commentText());
 		constructorNode.setScope(parseScope(constructorDoc));
-		constructorNode.setIsIncluded(constructorDoc.isIncluded());
-		constructorNode.setIsFinal(constructorDoc.isFinal());
-		constructorNode.setIsNative(constructorDoc.isNative());
-		constructorNode.setIsStatic(constructorDoc.isStatic());
-		constructorNode.setIsSynchronized(constructorDoc.isSynchronized());
-		constructorNode.setIsVarArgs(constructorDoc.isVarArgs());
+		constructorNode.setIncluded(constructorDoc.isIncluded());
+		constructorNode.setFinal(constructorDoc.isFinal());
+		constructorNode.setNative(constructorDoc.isNative());
+		constructorNode.setStatic(constructorDoc.isStatic());
+		constructorNode.setSynchronized(constructorDoc.isSynchronized());
+		constructorNode.setVarArgs(constructorDoc.isVarArgs());
 		constructorNode.setSignature(constructorDoc.signature());
 
 		for (Parameter parameter : constructorDoc.parameters()) {
@@ -334,13 +334,13 @@ public class Parser {
 		methodNode.setQualifiedName(methodDoc.qualifiedName());
 		methodNode.setComment(methodDoc.commentText());
 		methodNode.setScope(parseScope(methodDoc));
-		methodNode.setIsAbstract(methodDoc.isAbstract());
-		methodNode.setIsIncluded(methodDoc.isIncluded());
-		methodNode.setIsFinal(methodDoc.isFinal());
-		methodNode.setIsNative(methodDoc.isNative());
-		methodNode.setIsStatic(methodDoc.isStatic());
-		methodNode.setIsSynchronized(methodDoc.isSynchronized());
-		methodNode.setIsVarArgs(methodDoc.isVarArgs());
+		methodNode.setAbstract(methodDoc.isAbstract());
+		methodNode.setIncluded(methodDoc.isIncluded());
+		methodNode.setFinal(methodDoc.isFinal());
+		methodNode.setNative(methodDoc.isNative());
+		methodNode.setStatic(methodDoc.isStatic());
+		methodNode.setSynchronized(methodDoc.isSynchronized());
+		methodNode.setVarArgs(methodDoc.isVarArgs());
 		methodNode.setSignature(methodDoc.signature());
 		methodNode.setReturn(parseTypeInfo(methodDoc.returnType()));
 
@@ -378,10 +378,10 @@ public class Parser {
 		fieldNode.setQualifiedName(fieldDoc.qualifiedName());
 		fieldNode.setComment(fieldDoc.commentText());
 		fieldNode.setScope(parseScope(fieldDoc));
-		fieldNode.setIsFinal(fieldDoc.isFinal());
-		fieldNode.setIsStatic(fieldDoc.isStatic());
-		fieldNode.setIsVolatile(fieldDoc.isVolatile());
-		fieldNode.setIsTransient(fieldDoc.isTransient());
+		fieldNode.setFinal(fieldDoc.isFinal());
+		fieldNode.setStatic(fieldDoc.isStatic());
+		fieldNode.setVolatile(fieldDoc.isVolatile());
+		fieldNode.setTransient(fieldDoc.isTransient());
 		fieldNode.setConstant(fieldDoc.constantValueExpression());
 
 		for (AnnotationDesc annotationDesc : fieldDoc.annotations()) {

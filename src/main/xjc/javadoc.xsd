@@ -32,7 +32,7 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="scope" minOccurs="0" />
-			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="included" type="xs:boolean" />
 			<xs:element name="elements" type="annotationElement"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="annotations" type="annotationInstance"
@@ -67,8 +67,8 @@
 			<xs:element name="value" type="xs:string" minOccurs="0"
 				maxOccurs="unbounded" />
 			<xs:element name="type" type="xs:string" minOccurs="0" />
-			<xs:element name="isPrimitive" type="xs:boolean" />
-			<xs:element name="isArray" type="xs:boolean" />
+			<xs:element name="primitive" type="xs:boolean" />
+			<xs:element name="array" type="xs:boolean" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -79,7 +79,7 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="included" type="xs:boolean" />
 			<xs:element name="extends" type="typeInfo" minOccurs="0" />
 			<xs:element name="implements" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
@@ -106,7 +106,7 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="isIncluded" type="xs:boolean" />
+			<xs:element name="included" type="xs:boolean" />
 			<xs:element name="generics" type="typeParameter"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="extends" type="typeInfo" minOccurs="0"
@@ -125,12 +125,12 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="isAbstract" type="xs:boolean" />
-			<xs:element name="isError" type="xs:boolean" />
-			<xs:element name="isException" type="xs:boolean" />
-			<xs:element name="isExternalizable" type="xs:boolean" />
-			<xs:element name="isIncluded" type="xs:boolean" />
-			<xs:element name="isSerializable" type="xs:boolean" />
+			<xs:element name="abstract" type="xs:boolean" />
+			<xs:element name="error" type="xs:boolean" />
+			<xs:element name="exception" type="xs:boolean" />
+			<xs:element name="externalizable" type="xs:boolean" />
+			<xs:element name="included" type="xs:boolean" />
+			<xs:element name="serializable" type="xs:boolean" />
 			<xs:element name="generics" type="typeParameter"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="extends" type="typeInfo" minOccurs="0" />
@@ -154,12 +154,12 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="isFinal" type="xs:boolean" />
-			<xs:element name="isIncluded" type="xs:boolean" />
-			<xs:element name="isNative" type="xs:boolean" />
-			<xs:element name="isSynchronized" type="xs:boolean" />
-			<xs:element name="isStatic" type="xs:boolean" />
-			<xs:element name="isVarArgs" type="xs:boolean" />
+			<xs:element name="final" type="xs:boolean" />
+			<xs:element name="included" type="xs:boolean" />
+			<xs:element name="native" type="xs:boolean" />
+			<xs:element name="synchronized" type="xs:boolean" />
+			<xs:element name="static" type="xs:boolean" />
+			<xs:element name="varArgs" type="xs:boolean" />
 			<xs:element name="signature" type="xs:string" minOccurs="0" />
 			<xs:element name="parameters" type="methodParameter"
 				minOccurs="0" maxOccurs="unbounded" />
@@ -177,13 +177,13 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="isAbstract" type="xs:boolean" />
-			<xs:element name="isFinal" type="xs:boolean" />
-			<xs:element name="isIncluded" type="xs:boolean" />
-			<xs:element name="isNative" type="xs:boolean" />
-			<xs:element name="isSynchronized" type="xs:boolean" />
-			<xs:element name="isStatic" type="xs:boolean" />
-			<xs:element name="isVarArgs" type="xs:boolean" />
+			<xs:element name="abstract" type="xs:boolean" />
+			<xs:element name="final" type="xs:boolean" />
+			<xs:element name="included" type="xs:boolean" />
+			<xs:element name="native" type="xs:boolean" />
+			<xs:element name="synchronized" type="xs:boolean" />
+			<xs:element name="static" type="xs:boolean" />
+			<xs:element name="varArgs" type="xs:boolean" />
 			<xs:element name="signature" type="xs:string" minOccurs="0" />
 			<xs:element name="parameters" type="methodParameter"
 				minOccurs="0" maxOccurs="unbounded" />
@@ -212,10 +212,10 @@
 				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
 			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="isVolatile" type="xs:boolean" />
-			<xs:element name="isTransient" type="xs:boolean" />
-			<xs:element name="isStatic" type="xs:boolean" />
-			<xs:element name="isFinal" type="xs:boolean" />
+			<xs:element name="volatile" type="xs:boolean" />
+			<xs:element name="transient" type="xs:boolean" />
+			<xs:element name="static" type="xs:boolean" />
+			<xs:element name="final" type="xs:boolean" />
 			<xs:element name="constant" type="xs:string" minOccurs="0" />
 			<xs:element name="annotations" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
