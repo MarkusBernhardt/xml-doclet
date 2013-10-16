@@ -36,9 +36,14 @@ public class XmlDoclet {
 	private final static Logger log = LoggerFactory.getLogger(Parser.class);
 
 	/**
+	 * The parsed object model. Used in unit tests.
+	 */
+	public static Root root;
+
+	/**
 	 * The Options instance to parse command line strings.
 	 */
-	private final static Options options;
+	public final static Options options;
 
 	static {
 		options = new Options();
@@ -49,17 +54,23 @@ public class XmlDoclet {
 		OptionBuilder.withDescription("Destination directory for output file.\nDefault: .");
 		options.addOption(OptionBuilder.create("d"));
 
-		OptionBuilder.withArgName("filename");
-		OptionBuilder.isRequired(false);
-		OptionBuilder.hasArg();
-		OptionBuilder.withDescription("Name of the output file.\nDefault: javadoc.xml");
-		options.addOption(OptionBuilder.create("filename"));
-
 		OptionBuilder.withArgName("docencoding");
 		OptionBuilder.isRequired(false);
 		OptionBuilder.hasArg();
 		OptionBuilder.withDescription("Encoding of the output file.\nDefault: UTF8");
 		options.addOption(OptionBuilder.create("docencoding"));
+
+		OptionBuilder.withArgName("dryrun");
+		OptionBuilder.isRequired(false);
+		OptionBuilder.hasArgs(0);
+		OptionBuilder.withDescription("Parse javadoc, but don't write output file.\nDefault: false");
+		options.addOption(OptionBuilder.create("dryrun"));
+
+		OptionBuilder.withArgName("filename");
+		OptionBuilder.isRequired(false);
+		OptionBuilder.hasArg();
+		OptionBuilder.withDescription("Name of the output file.\nDefault: javadoc.xml");
+		options.addOption(OptionBuilder.create("filename"));
 	}
 
 	/**
@@ -125,7 +136,7 @@ public class XmlDoclet {
 	public static boolean start(RootDoc rootDoc) {
 		CommandLine commandLine = parseCommandLine(rootDoc.options());
 		Parser parser = new Parser();
-		Root root = parser.parseRootDoc(rootDoc);
+		root = parser.parseRootDoc(rootDoc);
 		save(commandLine, root);
 		return true;
 	}
@@ -137,6 +148,10 @@ public class XmlDoclet {
 	 * @param root
 	 */
 	public static void save(CommandLine commandLine, Root root) {
+		if (commandLine.hasOption("dryrun")) {
+			return;
+		}
+
 		FileOutputStream fileOutputStream = null;
 		BufferedOutputStream bufferedOutputStream = null;
 		try {
