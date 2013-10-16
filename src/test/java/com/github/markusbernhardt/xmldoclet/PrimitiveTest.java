@@ -6,6 +6,7 @@ public class PrimitiveTest extends AbstractTestParent {
 
 	@Test
 	public void test() {
-		executeJavadoc(null, new String[] { "./src/test/java" }, null, null, new String[] { "com" });
+		executeJavadoc(null, new String[] { "./src/test/java" }, null, null, new String[] { "com" }, new String[] {
+				"-d", "target" });
 	}
 }
