@@ -3,7 +3,6 @@ package com.github.markusbernhardt.xmldoclet;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.cli.HelpFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -431,7 +430,7 @@ public class Parser {
 		if (dimension.length() > 0) {
 			typeInfoNode.setDimension(dimension);
 		}
-		
+
 		WildcardType wildcard = type.asWildcardType();
 		if (wildcard != null) {
 			typeInfoNode.setWildcard(parseWildcard(wildcard));
