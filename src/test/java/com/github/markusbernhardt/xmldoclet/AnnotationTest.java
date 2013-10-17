@@ -69,7 +69,7 @@ public class AnnotationTest extends AbstractTestParent {
 		AnnotationInstance annotationInstance = annotationNode.getAnnotations().get(0);
 
 		assertEquals(rootNode.getPackages().size(), 1);
-		assertEquals(packageNode.getComment(), "");
+		assertEquals(packageNode.getComment(), null);
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
 		assertEquals(packageNode.getAnnotations().size(), 1);
 		assertEquals(packageNode.getEnums().size(), 0);
@@ -103,7 +103,7 @@ public class AnnotationTest extends AbstractTestParent {
 		AnnotationElement element = annotationNode.getElements().get(0);
 
 		assertEquals(rootNode.getPackages().size(), 1);
-		assertEquals(packageNode.getComment(), "");
+		assertEquals(packageNode.getComment(), null);
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
 		assertEquals(packageNode.getAnnotations().size(), 1);
 		assertEquals(packageNode.getEnums().size(), 0);
@@ -137,7 +137,7 @@ public class AnnotationTest extends AbstractTestParent {
 		Annotation annotationNode = packageNode.getAnnotations().get(0);
 
 		assertEquals(rootNode.getPackages().size(), 1);
-		assertEquals(packageNode.getComment(), "");
+		assertEquals(packageNode.getComment(), null);
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
 		assertEquals(packageNode.getAnnotations().size(), 1);
 		assertEquals(packageNode.getEnums().size(), 0);

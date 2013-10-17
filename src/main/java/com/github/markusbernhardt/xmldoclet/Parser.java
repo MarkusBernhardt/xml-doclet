@@ -45,7 +45,7 @@ public class Parser {
 
 	private final static Logger log = LoggerFactory.getLogger(Parser.class);
 
-	protected Map<PackageDoc, Package> packages = new TreeMap<PackageDoc, Package>();
+	protected Map<String, Package> packages = new TreeMap<String, Package>();
 
 	protected ObjectFactory objectFactory = new ObjectFactory();
 
@@ -62,10 +62,10 @@ public class Parser {
 		for (ClassDoc classDoc : rootDoc.classes()) {
 			PackageDoc packageDoc = classDoc.containingPackage();
 
-			Package packageNode = packages.get(packageDoc);
+			Package packageNode = packages.get(packageDoc.name());
 			if (packageNode == null) {
-				packageNode = objectFactory.createPackage();
-				packages.put(packageDoc, packageNode);
+				packageNode = parsePackage(packageDoc);
+				packages.put(packageDoc.name(), packageNode);
 				rootNode.getPackages().add(packageNode);
 			}
 
@@ -83,6 +83,16 @@ public class Parser {
 		return rootNode;
 	}
 
+	protected Package parsePackage(PackageDoc packageDoc) {
+		Package packageNode = objectFactory.createPackage();
+		packageNode.setName(packageDoc.name());
+		String comment = packageDoc.commentText();
+		if(comment. length() > 0) {
+		packageNode.setComment(comment);
+		}
+		return packageNode;
+	}
+
 	/**
 	 * Parse an annotation.
 	 * 
@@ -91,8 +101,6 @@ public class Parser {
 	 * @return the annotation node
 	 */
 	protected Annotation parseAnnotationTypeDoc(AnnotationTypeDoc annotationTypeDoc) {
-		log.debug("Parsing annotation " + annotationTypeDoc.qualifiedName());
-
 		Annotation annotationNode = objectFactory.createAnnotation();
 		annotationNode.setName(annotationTypeDoc.name());
 		annotationNode.setQualifiedName(annotationTypeDoc.qualifiedName());
