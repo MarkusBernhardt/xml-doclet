@@ -426,8 +426,11 @@ public class Parser {
 	protected TypeInfo parseTypeInfo(Type type) {
 		TypeInfo typeInfoNode = objectFactory.createTypeInfo();
 		typeInfoNode.setQualifiedName(type.qualifiedTypeName());
-		typeInfoNode.setDimension(type.dimension());
-
+		String dimension = type.dimension();
+		if (dimension.length() > 0) {
+			typeInfoNode.setDimension(dimension);
+		}
+		
 		WildcardType wildcard = type.asWildcardType();
 		if (wildcard != null) {
 			typeInfoNode.setWildcard(parseWildcard(wildcard));
