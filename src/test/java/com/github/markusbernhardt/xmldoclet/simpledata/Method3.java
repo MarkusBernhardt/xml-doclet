@@ -1,6 +1,5 @@
 package com.github.markusbernhardt.xmldoclet.simpledata;
 
-import java.util.ArrayList;
 
 /**
  * Class1
