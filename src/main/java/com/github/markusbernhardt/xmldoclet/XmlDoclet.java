@@ -136,7 +136,6 @@ public class XmlDoclet {
 	public static boolean start(RootDoc rootDoc) {
 		HelpFormatter h = new HelpFormatter();
 		h.printHelp("javadoc ", options);
-		
 
 		CommandLine commandLine = parseCommandLine(rootDoc.options());
 		Parser parser = new Parser();

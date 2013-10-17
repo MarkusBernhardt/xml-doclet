@@ -249,8 +249,8 @@ public class MethodTest extends AbstractTestParent {
 		methodParameterNode = methodNode.getParameters().get(0);
 		assertEquals(methodParameterNode.getName(), "object");
 		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.lang.Object");
-		assertEquals(methodParameterNode.getType().getDimension(), "[]"); 
-		
+		assertEquals(methodParameterNode.getType().getDimension(), "[]");
+
 		// methodNode9--check var args negative test
 		assertFalse(findByMethodName("method9", testMethods).isVarArgs());
 	}

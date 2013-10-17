@@ -1,5 +1,4 @@
 package com.github.markusbernhardt.xmldoclet.simpledata;
 
-public @interface Annotation1
-{
+public @interface Annotation1 {
 }

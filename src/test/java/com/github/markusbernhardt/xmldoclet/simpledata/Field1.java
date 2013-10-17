@@ -6,43 +6,42 @@ import java.util.HashMap;
 /**
  * Field1
  */
-public class Field1
-{
-    public String field0;
-    
-    public String field1;
+public class Field1 {
+	public String field0;
 
-    private String field2;
+	public String field1;
 
-    String field3;
+	private String field2;
 
-    protected String field4;
+	String field3;
 
-    public volatile String field5;
+	protected String field4;
 
-    public static String field6;
+	public volatile String field5;
 
-    public transient String field7;
+	public static String field6;
 
-    public final String field8 = "mer";
+	public transient String field7;
 
-    public final String field9 = "testy";
+	public final String field8 = "mer";
 
-    public final int field10 = 10;
+	public final String field9 = "testy";
 
-    @Deprecated
-    public String field11;
+	public final int field10 = 10;
 
-    @Deprecated
-    @SuppressWarnings("mister")
-    public String field12;
-    
-    public String field13;
+	@Deprecated
+	public String field11;
 
-    public ArrayList<?> field14;
+	@Deprecated
+	@SuppressWarnings("mister")
+	public String field12;
 
-    public HashMap<String, Integer> field15;
+	public String field13;
 
-    public String[]  field16;
+	public ArrayList<?> field14;
+
+	public HashMap<String, Integer> field15;
+
+	public String[] field16;
 
 }

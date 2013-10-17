@@ -1,6 +1,5 @@
 package com.github.markusbernhardt.xmldoclet.simpledata;
 
-public class Class1
-{
-  
+public class Class1 {
+
 }

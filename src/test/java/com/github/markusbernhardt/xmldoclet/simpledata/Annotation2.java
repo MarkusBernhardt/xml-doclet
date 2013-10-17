@@ -4,6 +4,5 @@ package com.github.markusbernhardt.xmldoclet.simpledata;
  * Annotation2
  */
 @Deprecated
-public @interface Annotation2
-{
+public @interface Annotation2 {
 }

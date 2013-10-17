@@ -269,7 +269,8 @@ public class ClassTest extends AbstractTestParent {
 		assertEquals(classNode.getFields().size(), 0);
 		assertEquals(classNode.getAnnotations().size(), 0);
 		assertEquals(classNode.getImplements().size(), 0);
-		assertEquals(classNode.getExtends().getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Class3");
+		assertEquals(classNode.getExtends().getQualifiedName(),
+				"com.github.markusbernhardt.xmldoclet.simpledata.Class3");
 		assertFalse(classNode.isAbstract());
 		assertFalse(classNode.isExternalizable());
 		assertTrue(classNode.isIncluded());
