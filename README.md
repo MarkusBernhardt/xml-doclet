@@ -27,10 +27,13 @@ Parameter
 
     -d <directory>            Destination directory for output file.
                               Default: .
+                              
     -docencoding <encoding>   Encoding of the output file.
                               Default: UTF8
+                              
     -dryrun                   Parse javadoc, but don't write output file.
                               Default: false
+                              
     -filename <filename>      Name of the output file.
                               Default: javadoc.xml
 
