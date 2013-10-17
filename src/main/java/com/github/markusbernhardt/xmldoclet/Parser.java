@@ -87,8 +87,8 @@ public class Parser {
 		Package packageNode = objectFactory.createPackage();
 		packageNode.setName(packageDoc.name());
 		String comment = packageDoc.commentText();
-		if(comment. length() > 0) {
-		packageNode.setComment(comment);
+		if (comment.length() > 0) {
+			packageNode.setComment(comment);
 		}
 		return packageNode;
 	}
@@ -104,7 +104,10 @@ public class Parser {
 		Annotation annotationNode = objectFactory.createAnnotation();
 		annotationNode.setName(annotationTypeDoc.name());
 		annotationNode.setQualifiedName(annotationTypeDoc.qualifiedName());
-		annotationNode.setComment(annotationTypeDoc.commentText());
+		String comment = annotationTypeDoc.commentText();
+		if (comment.length() > 0) {
+			annotationNode.setComment(comment);
+		}
 		annotationNode.setIncluded(annotationTypeDoc.isIncluded());
 		annotationNode.setScope(parseScope(annotationTypeDoc));
 
@@ -189,7 +192,10 @@ public class Parser {
 		Enum enumNode = objectFactory.createEnum();
 		enumNode.setName(classDoc.name());
 		enumNode.setQualifiedName(classDoc.qualifiedName());
-		enumNode.setComment(classDoc.commentText());
+		String comment = classDoc.commentText();
+		if (comment.length() > 0) {
+			enumNode.setComment(comment);
+		}
 		enumNode.setIncluded(classDoc.isIncluded());
 		enumNode.setScope(parseScope(classDoc));
 
@@ -222,7 +228,10 @@ public class Parser {
 	protected EnumConstant parseEnumConstant(FieldDoc fieldDoc) {
 		EnumConstant enumConstant = objectFactory.createEnumConstant();
 		enumConstant.setName(fieldDoc.name());
-		enumConstant.setComment(fieldDoc.commentText());
+		String comment = fieldDoc.commentText();
+		if (comment.length() > 0) {
+			enumConstant.setComment(comment);
+		}
 
 		for (AnnotationDesc annotationDesc : fieldDoc.annotations()) {
 			enumConstant.getAnnotations().add(parseAnnotationDesc(annotationDesc, fieldDoc.qualifiedName()));
@@ -236,7 +245,10 @@ public class Parser {
 		Interface interfaceNode = objectFactory.createInterface();
 		interfaceNode.setName(classDoc.name());
 		interfaceNode.setQualifiedName(classDoc.qualifiedName());
-		interfaceNode.setComment(classDoc.commentText());
+		String comment = classDoc.commentText();
+		if (comment.length() > 0) {
+			interfaceNode.setComment(comment);
+		}
 		interfaceNode.setIncluded(classDoc.isIncluded());
 		interfaceNode.setScope(parseScope(classDoc));
 
@@ -264,7 +276,10 @@ public class Parser {
 		Class classNode = objectFactory.createClass();
 		classNode.setName(classDoc.name());
 		classNode.setQualifiedName(classDoc.qualifiedName());
-		classNode.setComment(classDoc.commentText());
+		String comment = classDoc.commentText();
+		if (comment.length() > 0) {
+			classNode.setComment(comment);
+		}
 		classNode.setAbstract(classDoc.isAbstract());
 		classNode.setError(classDoc.isError());
 		classNode.setException(classDoc.isException());
@@ -310,7 +325,10 @@ public class Parser {
 
 		constructorNode.setName(constructorDoc.name());
 		constructorNode.setQualifiedName(constructorDoc.qualifiedName());
-		constructorNode.setComment(constructorDoc.commentText());
+		String comment = constructorDoc.commentText();
+		if (comment.length() > 0) {
+			constructorNode.setComment(comment);
+		}
 		constructorNode.setScope(parseScope(constructorDoc));
 		constructorNode.setIncluded(constructorDoc.isIncluded());
 		constructorNode.setFinal(constructorDoc.isFinal());
@@ -340,7 +358,10 @@ public class Parser {
 
 		methodNode.setName(methodDoc.name());
 		methodNode.setQualifiedName(methodDoc.qualifiedName());
-		methodNode.setComment(methodDoc.commentText());
+		String comment = methodDoc.commentText();
+		if (comment.length() > 0) {
+			methodNode.setComment(comment);
+		}
 		methodNode.setScope(parseScope(methodDoc));
 		methodNode.setAbstract(methodDoc.isAbstract());
 		methodNode.setIncluded(methodDoc.isIncluded());
@@ -384,7 +405,10 @@ public class Parser {
 		fieldNode.setType(parseTypeInfo(fieldDoc.type()));
 		fieldNode.setName(fieldDoc.name());
 		fieldNode.setQualifiedName(fieldDoc.qualifiedName());
-		fieldNode.setComment(fieldDoc.commentText());
+		String comment = fieldDoc.commentText();
+		if (comment.length() > 0) {
+			fieldNode.setComment(comment);
+		}
 		fieldNode.setScope(parseScope(fieldDoc));
 		fieldNode.setFinal(fieldDoc.isFinal());
 		fieldNode.setStatic(fieldDoc.isStatic());
