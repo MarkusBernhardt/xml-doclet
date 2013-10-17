@@ -1,6 +1,5 @@
 package com.github.markusbernhardt.xmldoclet.simpledata;
 
-
 /**
  * Class1
  */
@@ -49,7 +48,7 @@ public class Method3 {
 	}
 
 	@Deprecated
-	@SuppressWarnings("java.lang.Warning")
+	@Annotation12("java.lang.Warning")
 	public void method12() {
 
 	}

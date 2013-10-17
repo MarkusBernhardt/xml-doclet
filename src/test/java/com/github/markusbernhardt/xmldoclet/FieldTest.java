@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.github.markusbernhardt.xmldoclet.simpledata.Annotation12;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationArgument;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationInstance;
 import com.github.markusbernhardt.xmldoclet.xjc.Class;
@@ -124,8 +125,8 @@ public class FieldTest extends AbstractTestParent {
 		assertEquals(annotation.getArguments().size(), 0);
 
 		annotation = field.getAnnotations().get(1);
-		assertEquals(annotation.getQualifiedName(), "java.lang.SuppressWarnings");
-		assertEquals(annotation.getName(), "SuppressWarnings");
+		assertEquals(annotation.getQualifiedName(), Annotation12.class.getName());
+		assertEquals(annotation.getName(), Annotation12.class.getSimpleName());
 		assertEquals(annotation.getArguments().size(), 1);
 
 		AnnotationArgument argument = annotation.getArguments().get(0);

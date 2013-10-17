@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.github.markusbernhardt.xmldoclet.simpledata.Annotation12;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationArgument;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationInstance;
 import com.github.markusbernhardt.xmldoclet.xjc.Class;
@@ -351,7 +352,7 @@ public class MethodTest extends AbstractTestParent {
 		assertEquals(annotation.getQualifiedName(), "java.lang.Deprecated");
 
 		annotation = methodNode.getAnnotations().get(1);
-		assertEquals(annotation.getQualifiedName(), "java.lang.SuppressWarnings");
+		assertEquals(annotation.getQualifiedName(), Annotation12.class.getName());
 		assertEquals(annotation.getArguments().size(), 1);
 		AnnotationArgument annotArgument = annotation.getArguments().get(0);
 		assertEquals(annotArgument.getName(), "value");

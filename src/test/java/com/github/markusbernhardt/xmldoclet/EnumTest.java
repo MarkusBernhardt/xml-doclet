@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+import com.github.markusbernhardt.xmldoclet.simpledata.Annotation12;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationArgument;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationInstance;
 import com.github.markusbernhardt.xmldoclet.xjc.Enum;
@@ -129,8 +130,8 @@ public class EnumTest extends AbstractTestParent {
 		assertEquals(annotationInstanceNode.getArguments().size(), 0);
 
 		annotationInstanceNode = enumNode.getAnnotations().get(1);
-		assertEquals(annotationInstanceNode.getQualifiedName(), "java.lang.SuppressWarnings");
-		assertEquals(annotationInstanceNode.getName(), "SuppressWarnings");
+		assertEquals(annotationInstanceNode.getQualifiedName(), Annotation12.class.getName());
+		assertEquals(annotationInstanceNode.getName(), Annotation12.class.getSimpleName());
 		assertEquals(annotationInstanceNode.getArguments().size(), 1);
 
 		AnnotationArgument annotationArgumentNode = annotationInstanceNode.getArguments().get(0);

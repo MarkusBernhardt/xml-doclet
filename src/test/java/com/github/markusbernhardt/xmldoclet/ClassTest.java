@@ -307,7 +307,7 @@ public class ClassTest extends AbstractTestParent {
 		assertEquals(classNode.getScope(), "public");
 		assertEquals(classNode.getMethods().size(), 0);
 		assertEquals(classNode.getFields().size(), 0);
-		assertEquals(classNode.getAnnotations().size(), 0);
+		assertEquals(classNode.getAnnotations().size(), 1);
 		assertEquals(classNode.getImplements().size(), 1);
 		assertEquals(classNode.getExtends().getQualifiedName(), Object.class.getName());
 		assertFalse(classNode.isAbstract());
@@ -509,7 +509,7 @@ public class ClassTest extends AbstractTestParent {
 		assertEquals(classNode.getScope(), "public");
 		assertEquals(classNode.getMethods().size(), 0);
 		assertEquals(classNode.getFields().size(), 0);
-		assertEquals(classNode.getAnnotations().size(), 0);
+		assertEquals(classNode.getAnnotations().size(), 1);
 		assertEquals(classNode.getImplements().size(), 0);
 		assertEquals(classNode.getExtends().getQualifiedName(), java.lang.Exception.class.getName());
 		assertFalse(classNode.isAbstract());
@@ -547,7 +547,7 @@ public class ClassTest extends AbstractTestParent {
 		assertEquals(classNode.getScope(), "public");
 		assertEquals(classNode.getMethods().size(), 0);
 		assertEquals(classNode.getFields().size(), 0);
-		assertEquals(classNode.getAnnotations().size(), 0);
+		assertEquals(classNode.getAnnotations().size(), 1);
 		assertEquals(classNode.getImplements().size(), 0);
 		assertEquals(classNode.getExtends().getQualifiedName(), java.lang.Error.class.getName());
 		assertFalse(classNode.isAbstract());
@@ -644,7 +644,7 @@ public class ClassTest extends AbstractTestParent {
 
 		assertEquals(typeParameter.getName(), "Fun");
 		assertEquals(typeParameter.getBounds().size(), 1);
-		assertEquals(typeParameter.getBounds().get(0), String.class.getName());
+		assertEquals(typeParameter.getBounds().get(0), Number.class.getName());
 	}
 
 	/**
@@ -688,7 +688,7 @@ public class ClassTest extends AbstractTestParent {
 		// check the 'fun' type var
 		assertEquals(typeParameter.getName(), "Fun");
 		assertEquals(typeParameter.getBounds().size(), 2);
-		assertEquals(typeParameter.getBounds().get(0), String.class.getName());
+		assertEquals(typeParameter.getBounds().get(0), Number.class.getName());
 		assertEquals(typeParameter.getBounds().get(1), Runnable.class.getName());
 	}
 

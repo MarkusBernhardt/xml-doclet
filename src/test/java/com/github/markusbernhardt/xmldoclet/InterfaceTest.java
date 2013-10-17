@@ -283,7 +283,7 @@ public class InterfaceTest extends AbstractTestParent {
 		assertTrue(interfaceNode.isIncluded());
 
 		assertEquals(typeParameterNode.getBounds().size(), 1);
-		assertEquals(typeParameterNode.getBounds().get(0), "java.lang.String");
+		assertEquals(typeParameterNode.getBounds().get(0), "java.lang.Number");
 	}
 
 	/**
@@ -317,7 +317,7 @@ public class InterfaceTest extends AbstractTestParent {
 		assertTrue(interfaceNode.isIncluded());
 
 		assertEquals(typeParameterNode.getBounds().size(), 2);
-		assertEquals(typeParameterNode.getBounds().get(0), "java.lang.String");
+		assertEquals(typeParameterNode.getBounds().get(0), "java.lang.Number");
 		assertEquals(typeParameterNode.getBounds().get(1), "java.lang.Runnable");
 	}
 }

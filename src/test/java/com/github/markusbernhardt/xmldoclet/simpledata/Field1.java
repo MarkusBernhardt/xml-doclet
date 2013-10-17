@@ -11,6 +11,7 @@ public class Field1 {
 
 	public String field1;
 
+	@SuppressWarnings("unused")
 	private String field2;
 
 	String field3;
@@ -33,7 +34,7 @@ public class Field1 {
 	public String field11;
 
 	@Deprecated
-	@SuppressWarnings("mister")
+	@Annotation12("mister")
 	public String field12;
 
 	public String field13;

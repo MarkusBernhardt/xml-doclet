@@ -134,9 +134,6 @@ public class XmlDoclet {
 	 * @return <code>true</code> if processing was successful.
 	 */
 	public static boolean start(RootDoc rootDoc) {
-		HelpFormatter h = new HelpFormatter();
-		h.printHelp("javadoc ", options);
-
 		CommandLine commandLine = parseCommandLine(rootDoc.options());
 		Parser parser = new Parser();
 		root = parser.parseRootDoc(rootDoc);
