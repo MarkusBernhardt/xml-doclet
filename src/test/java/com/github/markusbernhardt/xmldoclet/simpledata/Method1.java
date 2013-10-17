@@ -35,7 +35,7 @@ public class Method1
 
     /**
      * 
-     * @return
+     * @return lins
      */
     public Integer method6()
     {
@@ -44,7 +44,7 @@ public class Method1
 
     /**
      *
-     * @return 
+     * @return line
      */
     public Integer method7()
     {

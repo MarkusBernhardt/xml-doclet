@@ -48,13 +48,13 @@ public class XmlDoclet {
 	static {
 		options = new Options();
 
-		OptionBuilder.withArgName("d");
+		OptionBuilder.withArgName("directory");
 		OptionBuilder.isRequired(false);
 		OptionBuilder.hasArg();
 		OptionBuilder.withDescription("Destination directory for output file.\nDefault: .");
 		options.addOption(OptionBuilder.create("d"));
 
-		OptionBuilder.withArgName("docencoding");
+		OptionBuilder.withArgName("encoding");
 		OptionBuilder.isRequired(false);
 		OptionBuilder.hasArg();
 		OptionBuilder.withDescription("Encoding of the output file.\nDefault: UTF8");
@@ -134,6 +134,10 @@ public class XmlDoclet {
 	 * @return <code>true</code> if processing was successful.
 	 */
 	public static boolean start(RootDoc rootDoc) {
+		HelpFormatter h = new HelpFormatter();
+		h.printHelp("javadoc ", options);
+		
+
 		CommandLine commandLine = parseCommandLine(rootDoc.options());
 		Parser parser = new Parser();
 		root = parser.parseRootDoc(rootDoc);
