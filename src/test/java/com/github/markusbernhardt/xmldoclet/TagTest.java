@@ -16,22 +16,22 @@ public class TagTest extends AbstractTestParent {
 	 */
 	@Test
 	public void testTag1() {
-		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Tag1.java"
-				,"./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Class1.java"
-		};
-		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { });//"-dryrun" });
-/*
-		Package packageNode = rootNode.getPackages().get(0);
-		Class classNode = packageNode.getClasses().get(0);
+		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Tag1.java" };
+		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		Package packageNode = rootNode.getPackage().get(0);
+		Class classNode = packageNode.getClazz().get(0);
+
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 0);
-		assertEquals(packageNode.getClasses().size(), 1);
-*/
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 0);
+		assertEquals(packageNode.getClazz().size(), 1);
+
+		assertEquals(classNode.getTag().size(), 7);
+		assertEquals(classNode.getMethod().get(0).getTag().size(), 3);
 	}
 
 }
