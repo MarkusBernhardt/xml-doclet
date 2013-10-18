@@ -18,13 +18,13 @@ If you are using maven you can use this library by adding the following report t
         <scope>test</scope>
     </dependency>
 
-If you cannot use the maven you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.0/xml-doclet-1.0.0-jar-with-dependencies.jar), which contains all required libraries.
+If you cannot use the maven you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.1/xml-doclet-1.0.1-jar-with-dependencies.jar), which contains all required libraries.
 
     javadoc -doclet com.github.markusbernhardt.xmldoclet.XmlDoclet \
-    -docletpath xml-doclet-1.0.0-jar-with-dependencies.jar \
-    [Javadoc-Options] [XmlDoclet-Options]
+    -docletpath xml-doclet-1.0.1-jar-with-dependencies.jar \
+    [Javadoc- and XmlDoclet-Options]
 
-If you want more control and feel adventurous you could you use this [jar](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.0/xml-doclet-1.0.0.jar) and provide all required libraries from this [list](DEPENDENCIES.md) on your own.
+If you want more control and feel adventurous you could you use this [jar](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.1/xml-doclet-1.0.1.jar) and provide all required libraries from this [list](DEPENDENCIES.md) on your own.
 
 Options
 -------
