@@ -4,7 +4,7 @@
 	<xs:element name="root">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="packages" type="package" minOccurs="0"
+				<xs:element name="package" type="package" minOccurs="0"
 					maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
@@ -12,242 +12,258 @@
 
 	<xs:complexType name="package">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="annotations" type="annotation"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="enums" type="enum" minOccurs="0"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="interfaces" type="interface" minOccurs="0"
+			<xs:element name="annotation" type="annotation" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="classes" type="class" minOccurs="0"
+			<xs:element name="enum" type="enum" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="interface" type="interface" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="class" type="class" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="annotation">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="scope" minOccurs="0" />
-			<xs:element name="included" type="xs:boolean" />
-			<xs:element name="elements" type="annotationElement"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="element" type="annotationElement"
 				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="included" type="xs:boolean" default="true" />
 	</xs:complexType>
 
 	<xs:complexType name="annotationElement">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
-			<xs:element name="type" type="xs:string" minOccurs="0" />
-			<xs:element name="defaultValue" type="xs:string"
-				minOccurs="0" />
+			<xs:element name="type" type="typeInfo" minOccurs="0" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="default" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="annotationInstance">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
-			<xs:element name="arguments" type="annotationArgument"
+			<xs:element name="argument" type="annotationArgument"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="annotationArgument">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="type" type="typeInfo" minOccurs="0" />
 			<xs:element name="value" type="xs:string" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="type" type="xs:string" minOccurs="0" />
-			<xs:element name="primitive" type="xs:boolean" />
-			<xs:element name="array" type="xs:boolean" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="primitive" type="xs:boolean" default="false" />
+		<xs:attribute name="array" type="xs:boolean" default="false" />
 	</xs:complexType>
 
 	<xs:complexType name="enum">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="included" type="xs:boolean" />
-			<xs:element name="extends" type="typeInfo" minOccurs="0" />
-			<xs:element name="implements" type="typeInfo" minOccurs="0"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="constants" type="enumConstant"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="class" type="typeInfo" minOccurs="0" />
+			<xs:element name="interface" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="constant" type="enumConstant" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="included" type="xs:boolean" default="true" />
 	</xs:complexType>
 
 	<xs:complexType name="enumConstant">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="interface">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="included" type="xs:boolean" />
-			<xs:element name="generics" type="typeParameter"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="extends" type="typeInfo" minOccurs="0"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="methods" type="method" minOccurs="0"
+			<xs:element name="generic" type="typeParameter" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="interface" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="method" type="method" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="included" type="xs:boolean" default="true" />
 	</xs:complexType>
 
 	<xs:complexType name="class">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="abstract" type="xs:boolean" />
-			<xs:element name="error" type="xs:boolean" />
-			<xs:element name="exception" type="xs:boolean" />
-			<xs:element name="externalizable" type="xs:boolean" />
-			<xs:element name="included" type="xs:boolean" />
-			<xs:element name="serializable" type="xs:boolean" />
-			<xs:element name="generics" type="typeParameter"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="extends" type="typeInfo" minOccurs="0" />
-			<xs:element name="implements" type="typeInfo" minOccurs="0"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="constructors" type="constructor"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="methods" type="method" minOccurs="0"
+			<xs:element name="generic" type="typeParameter" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="class" type="typeInfo" minOccurs="0" />
+			<xs:element name="interface" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="constructor" type="constructor"
 				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="fields" type="field" minOccurs="0"
+			<xs:element name="method" type="method" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotation" type="annotationInstance"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="field" type="field" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="abstract" type="xs:boolean" default="false" />
+		<xs:attribute name="error" type="xs:boolean" default="false" />
+		<xs:attribute name="exception" type="xs:boolean" default="false" />
+		<xs:attribute name="externalizable" type="xs:boolean"
+			default="false" />
+		<xs:attribute name="included" type="xs:boolean" default="true" />
+		<xs:attribute name="serializable" type="xs:boolean"
+			default="false" />
 	</xs:complexType>
 
 	<xs:complexType name="constructor">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="final" type="xs:boolean" />
-			<xs:element name="included" type="xs:boolean" />
-			<xs:element name="native" type="xs:boolean" />
-			<xs:element name="synchronized" type="xs:boolean" />
-			<xs:element name="static" type="xs:boolean" />
-			<xs:element name="varArgs" type="xs:boolean" />
-			<xs:element name="signature" type="xs:string" minOccurs="0" />
-			<xs:element name="parameters" type="methodParameter"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="throws" type="typeInfo" minOccurs="0"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="parameter" type="methodParameter"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="exception" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="signature" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="final" type="xs:boolean" default="false" />
+		<xs:attribute name="included" type="xs:boolean" default="true" />
+		<xs:attribute name="native" type="xs:boolean" default="false" />
+		<xs:attribute name="synchronized" type="xs:boolean"
+			default="false" />
+		<xs:attribute name="static" type="xs:boolean" default="false" />
+		<xs:attribute name="varArgs" type="xs:boolean" default="false" />
 	</xs:complexType>
 
 	<xs:complexType name="method">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="abstract" type="xs:boolean" />
-			<xs:element name="final" type="xs:boolean" />
-			<xs:element name="included" type="xs:boolean" />
-			<xs:element name="native" type="xs:boolean" />
-			<xs:element name="synchronized" type="xs:boolean" />
-			<xs:element name="static" type="xs:boolean" />
-			<xs:element name="varArgs" type="xs:boolean" />
-			<xs:element name="signature" type="xs:string" minOccurs="0" />
-			<xs:element name="parameters" type="methodParameter"
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="parameter" type="methodParameter"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="return" type="typeInfo" minOccurs="0" />
-			<xs:element name="throws" type="typeInfo" minOccurs="0"
+			<xs:element name="exception" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="signature" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="abstract" type="xs:boolean" default="false" />
+		<xs:attribute name="final" type="xs:boolean" default="false" />
+		<xs:attribute name="included" type="xs:boolean" default="true" />
+		<xs:attribute name="native" type="xs:boolean" default="false" />
+		<xs:attribute name="synchronized" type="xs:boolean"
+			default="false" />
+		<xs:attribute name="static" type="xs:boolean" default="false" />
+		<xs:attribute name="varArgs" type="xs:boolean" default="false" />
 	</xs:complexType>
 
 	<xs:complexType name="methodParameter">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
 			<xs:element name="type" type="typeInfo" minOccurs="0" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="field">
 		<xs:sequence>
 			<xs:element name="type" type="typeInfo" minOccurs="0" />
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="comment" type="xs:string" minOccurs="0" />
-			<xs:element name="scope" type="xs:string" minOccurs="0" />
-			<xs:element name="volatile" type="xs:boolean" />
-			<xs:element name="transient" type="xs:boolean" />
-			<xs:element name="static" type="xs:boolean" />
-			<xs:element name="final" type="xs:boolean" />
+			<xs:element name="tag" type="tagInfo" minOccurs="0"
+				maxOccurs="unbounded" />
 			<xs:element name="constant" type="xs:string" minOccurs="0" />
-			<xs:element name="annotations" type="annotationInstance"
+			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="scope" type="scope" />
+		<xs:attribute name="volatile" type="xs:boolean" default="false" />
+		<xs:attribute name="transient" type="xs:boolean" default="false" />
+		<xs:attribute name="static" type="xs:boolean" default="false" />
+		<xs:attribute name="final" type="xs:boolean" default="false" />
 	</xs:complexType>
 
 	<xs:complexType name="typeInfo">
 		<xs:sequence>
-			<xs:element name="qualifiedName" type="xs:string"
-				minOccurs="0" />
 			<xs:element name="wildcard" type="wildcard" minOccurs="0" />
-			<xs:element name="generics" type="typeInfo" minOccurs="0"
+			<xs:element name="generic" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
-			<xs:element name="dimension" type="xs:string" minOccurs="0" />
 		</xs:sequence>
+		<xs:attribute name="qualified" type="xs:string" />
+		<xs:attribute name="dimension" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="typeParameter">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" />
-			<xs:element name="bounds" type="xs:string" minOccurs="0"
+			<xs:element name="bound" type="xs:string" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
 	</xs:complexType>
 
 	<xs:complexType name="wildcard">
 		<xs:sequence>
-			<xs:element name="extendsBounds" type="typeInfo"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="superBounds" type="typeInfo" minOccurs="0"
+			<xs:element name="extendsBound" type="typeInfo" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="superBound" type="typeInfo" minOccurs="0"
 				maxOccurs="unbounded" />
 		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="tagInfo">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="text" type="xs:string" />
 	</xs:complexType>
 
 	<xs:simpleType name="scope">

@@ -41,29 +41,29 @@ public class MethodTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Method1.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Class classNode = packageNode.getClasses().get(0);
-		List<Method> testMethods = classNode.getMethods();
+		Package packageNode = rootNode.getPackage().get(0);
+		Class classNode = packageNode.getClazz().get(0);
+		List<Method> testMethods = classNode.getMethod();
 
 		// with methodNode1 we are checking that a simple methodNode can exist
 		// with no arguments and no return
 		Method methodNode = findByMethodName("method1", testMethods);
-		assertEquals(methodNode.getReturn().getQualifiedName(), "void");
-		assertEquals(methodNode.getReturn().getGenerics().size(), 0);
+		assertEquals(methodNode.getReturn().getQualified(), "void");
+		assertEquals(methodNode.getReturn().getGeneric().size(), 0);
 		assertNull(methodNode.getReturn().getWildcard());
 		assertNull(methodNode.getReturn().getDimension());
 
 		// methodNode2 - checking Object based returns
 		methodNode = findByMethodName("method2", testMethods);
-		assertEquals(methodNode.getReturn().getQualifiedName(), "java.lang.Integer");
-		assertEquals(methodNode.getReturn().getGenerics().size(), 0);
+		assertEquals(methodNode.getReturn().getQualified(), "java.lang.Integer");
+		assertEquals(methodNode.getReturn().getGeneric().size(), 0);
 		assertNull(methodNode.getReturn().getWildcard());
 		assertNull(methodNode.getReturn().getDimension());
 
 		// methodNode 3 - checking primitive based returns
 		methodNode = findByMethodName("method3", testMethods);
-		assertEquals(methodNode.getReturn().getQualifiedName(), "int");
-		assertEquals(methodNode.getReturn().getGenerics().size(), 0);
+		assertEquals(methodNode.getReturn().getQualified(), "int");
+		assertEquals(methodNode.getReturn().getGeneric().size(), 0);
 		assertNull(methodNode.getReturn().getWildcard());
 		assertNull(methodNode.getReturn().getDimension());
 	}
@@ -76,180 +76,180 @@ public class MethodTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Method2.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Class classNode = packageNode.getClasses().get(0);
-		List<Method> testMethods = classNode.getMethods();
+		Package packageNode = rootNode.getPackage().get(0);
+		Class classNode = packageNode.getClazz().get(0);
+		List<Method> testMethods = classNode.getMethod();
 
 		// methodNode - methodNode with no arguments
 		Method methodNode = findByMethodName("method1", testMethods);
-		assertEquals(methodNode.getParameters().size(), 0);
+		assertEquals(methodNode.getParameter().size(), 0);
 		assertEquals(methodNode.getSignature(), "()");
 
 		// methodNode2 - methodNode with one Object-derived argument
 		methodNode = findByMethodName("method2", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(" + Integer.class.getName() + ")");
 
-		// one should be able to reliably access getParameters() in this fashion
-		// since XML order is important, and order of getParameters() to
+		// one should be able to reliably access getParameter() in this fashion
+		// since XML order is important, and order of getParameter() to
 		// methodNodes is
 		// likewise important. ORDER MATTERS AND SHOULD BE TRUSTY!
-		MethodParameter methodParameterNode = methodNode.getParameters().get(0);
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.lang.Integer");
+		MethodParameter methodParameterNode = methodNode.getParameter().get(0);
+		assertEquals(methodParameterNode.getType().getQualified(), "java.lang.Integer");
 
 		// methodNode3 - check primitive argument
 		methodNode = findByMethodName("method3", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(int)");
 
-		methodParameterNode = methodNode.getParameters().get(0);
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "int");
+		methodParameterNode = methodNode.getParameter().get(0);
+		assertEquals(methodParameterNode.getType().getQualified(), "int");
 		assertNull(methodParameterNode.getType().getDimension());
-		assertEquals(methodParameterNode.getType().getGenerics().size(), 0);
+		assertEquals(methodParameterNode.getType().getGeneric().size(), 0);
 		assertNull(methodParameterNode.getType().getWildcard());
 
 		// methodNode4 - check that two args are OK
 		methodNode = findByMethodName("method4", testMethods);
-		assertEquals(methodNode.getParameters().size(), 2);
+		assertEquals(methodNode.getParameter().size(), 2);
 		assertEquals(methodNode.getSignature(), "(" + Integer.class.getName() + ", " + Integer.class.getName() + ")");
 
-		methodParameterNode = methodNode.getParameters().get(0);
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.lang.Integer");
+		methodParameterNode = methodNode.getParameter().get(0);
+		assertEquals(methodParameterNode.getType().getQualified(), "java.lang.Integer");
 
-		methodParameterNode = methodNode.getParameters().get(1);
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.lang.Integer");
+		methodParameterNode = methodNode.getParameter().get(1);
+		assertEquals(methodParameterNode.getType().getQualified(), "java.lang.Integer");
 
 		// methodNode5 - check that a generic argument is valid
 		methodNode = findByMethodName("method5", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(java.util.ArrayList<java.lang.String>)");
 
-		methodParameterNode = methodNode.getParameters().get(0);
+		methodParameterNode = methodNode.getParameter().get(0);
 		assertEquals(methodParameterNode.getName(), "arg1");
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.util.ArrayList");
+		assertEquals(methodParameterNode.getType().getQualified(), "java.util.ArrayList");
 		assertNull(methodParameterNode.getType().getDimension());
 		assertNull(methodParameterNode.getType().getWildcard());
-		assertEquals(methodParameterNode.getType().getGenerics().size(), 1);
+		assertEquals(methodParameterNode.getType().getGeneric().size(), 1);
 
-		TypeInfo type = methodParameterNode.getType().getGenerics().get(0);
-		assertEquals(type.getQualifiedName(), "java.lang.String");
+		TypeInfo type = methodParameterNode.getType().getGeneric().get(0);
+		assertEquals(type.getQualified(), "java.lang.String");
 		assertNull(type.getDimension());
 		assertNull(type.getWildcard());
-		assertEquals(type.getGenerics().size(), 0);
+		assertEquals(type.getGeneric().size(), 0);
 
 		// methodNode6 - check that a wildcard argument is valid
 		methodNode = findByMethodName("method6", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(java.util.ArrayList<?>)");
 
-		methodParameterNode = methodNode.getParameters().get(0);
+		methodParameterNode = methodNode.getParameter().get(0);
 		assertEquals(methodParameterNode.getName(), "arg1");
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.util.ArrayList");
+		assertEquals(methodParameterNode.getType().getQualified(), "java.util.ArrayList");
 		assertNull(methodParameterNode.getType().getDimension());
 		assertNull(methodParameterNode.getType().getWildcard());
-		assertEquals(methodParameterNode.getType().getGenerics().size(), 1);
+		assertEquals(methodParameterNode.getType().getGeneric().size(), 1);
 
-		type = methodParameterNode.getType().getGenerics().get(0);
-		assertEquals(type.getQualifiedName(), "?");
+		type = methodParameterNode.getType().getGeneric().get(0);
+		assertEquals(type.getQualified(), "?");
 		assertNull(type.getDimension());
 		assertNotNull(type.getWildcard());
-		assertEquals(type.getGenerics().size(), 0);
+		assertEquals(type.getGeneric().size(), 0);
 
 		Wildcard wildcard = type.getWildcard();
-		assertEquals(wildcard.getExtendsBounds().size(), 0);
-		assertEquals(wildcard.getSuperBounds().size(), 0);
+		assertEquals(wildcard.getExtendsBound().size(), 0);
+		assertEquals(wildcard.getSuperBound().size(), 0);
 
 		// methodNode7 - check that a wildcard argument is valid with extends
 		// clause
 		methodNode = findByMethodName("method7", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(java.util.ArrayList<? extends java.lang.String>)");
 
-		methodParameterNode = methodNode.getParameters().get(0);
+		methodParameterNode = methodNode.getParameter().get(0);
 		assertEquals(methodParameterNode.getName(), "arg1");
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.util.ArrayList");
+		assertEquals(methodParameterNode.getType().getQualified(), "java.util.ArrayList");
 		assertEquals(methodParameterNode.getType().getDimension(), null);
-		assertEquals(methodParameterNode.getType().getGenerics().size(), 1);
+		assertEquals(methodParameterNode.getType().getGeneric().size(), 1);
 		assertNull(methodParameterNode.getType().getWildcard());
 
-		type = methodParameterNode.getType().getGenerics().get(0);
-		assertEquals(type.getQualifiedName(), "?");
+		type = methodParameterNode.getType().getGeneric().get(0);
+		assertEquals(type.getQualified(), "?");
 		assertEquals(type.getDimension(), null);
-		assertEquals(type.getGenerics().size(), 0);
+		assertEquals(type.getGeneric().size(), 0);
 		assertNotNull(type.getWildcard());
 
 		wildcard = type.getWildcard();
-		assertEquals(wildcard.getExtendsBounds().size(), 1);
-		assertEquals(wildcard.getSuperBounds().size(), 0);
+		assertEquals(wildcard.getExtendsBound().size(), 1);
+		assertEquals(wildcard.getSuperBound().size(), 0);
 
-		TypeInfo extendsBound = wildcard.getExtendsBounds().get(0);
-		assertEquals(extendsBound.getQualifiedName(), "java.lang.String");
+		TypeInfo extendsBound = wildcard.getExtendsBound().get(0);
+		assertEquals(extendsBound.getQualified(), "java.lang.String");
 		assertEquals(extendsBound.getDimension(), null);
-		assertEquals(extendsBound.getGenerics().size(), 0);
+		assertEquals(extendsBound.getGeneric().size(), 0);
 		assertNull(extendsBound.getWildcard());
 
 		// methodNode8 - check that a wildcard argument is valid with super
 		// clause
 		methodNode = findByMethodName("method8", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(java.util.ArrayList<? super java.lang.String>)");
 
-		methodParameterNode = methodNode.getParameters().get(0);
+		methodParameterNode = methodNode.getParameter().get(0);
 		assertEquals(methodParameterNode.getName(), "arg1");
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.util.ArrayList");
+		assertEquals(methodParameterNode.getType().getQualified(), "java.util.ArrayList");
 		assertEquals(methodParameterNode.getType().getDimension(), null);
-		assertEquals(methodParameterNode.getType().getGenerics().size(), 1);
+		assertEquals(methodParameterNode.getType().getGeneric().size(), 1);
 		assertNull(methodParameterNode.getType().getWildcard());
 
-		type = methodParameterNode.getType().getGenerics().get(0);
-		assertEquals(type.getQualifiedName(), "?");
+		type = methodParameterNode.getType().getGeneric().get(0);
+		assertEquals(type.getQualified(), "?");
 		assertEquals(type.getDimension(), null);
-		assertEquals(type.getGenerics().size(), 0);
+		assertEquals(type.getGeneric().size(), 0);
 		assertNotNull(type.getWildcard());
 
 		wildcard = type.getWildcard();
-		assertEquals(wildcard.getSuperBounds().size(), 1);
-		assertEquals(wildcard.getExtendsBounds().size(), 0);
+		assertEquals(wildcard.getSuperBound().size(), 1);
+		assertEquals(wildcard.getExtendsBound().size(), 0);
 
-		TypeInfo superBounds = wildcard.getSuperBounds().get(0);
-		assertEquals(superBounds.getQualifiedName(), "java.lang.String");
+		TypeInfo superBounds = wildcard.getSuperBound().get(0);
+		assertEquals(superBounds.getQualified(), "java.lang.String");
 		assertEquals(superBounds.getDimension(), null);
-		assertEquals(superBounds.getGenerics().size(), 0);
+		assertEquals(superBounds.getGeneric().size(), 0);
 		assertNull(superBounds.getWildcard());
 
 		// methodNode9 - check that a two-level deep nested generic
 		methodNode = findByMethodName("method9", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(java.util.ArrayList<java.util.ArrayList<java.lang.String>>)");
 
-		methodParameterNode = methodNode.getParameters().get(0);
+		methodParameterNode = methodNode.getParameter().get(0);
 		assertEquals(methodParameterNode.getName(), "arg1");
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.util.ArrayList");
+		assertEquals(methodParameterNode.getType().getQualified(), "java.util.ArrayList");
 		assertEquals(methodParameterNode.getType().getDimension(), null);
-		assertEquals(methodParameterNode.getType().getGenerics().size(), 1);
+		assertEquals(methodParameterNode.getType().getGeneric().size(), 1);
 		assertNull(methodParameterNode.getType().getWildcard());
 
-		type = methodParameterNode.getType().getGenerics().get(0);
-		assertEquals(type.getQualifiedName(), "java.util.ArrayList");
+		type = methodParameterNode.getType().getGeneric().get(0);
+		assertEquals(type.getQualified(), "java.util.ArrayList");
 		assertEquals(type.getDimension(), null);
-		assertEquals(type.getGenerics().size(), 1);
+		assertEquals(type.getGeneric().size(), 1);
 		assertNull(type.getWildcard());
 
-		type = type.getGenerics().get(0);
-		assertEquals(type.getQualifiedName(), "java.lang.String");
+		type = type.getGeneric().get(0);
+		assertEquals(type.getQualified(), "java.lang.String");
 		assertEquals(type.getDimension(), null);
-		assertEquals(type.getGenerics().size(), 0);
+		assertEquals(type.getGeneric().size(), 0);
 		assertNull(type.getWildcard());
 
 		// methodNode10 - check var args
 		methodNode = findByMethodName("method10", testMethods);
-		assertEquals(methodNode.getParameters().size(), 1);
+		assertEquals(methodNode.getParameter().size(), 1);
 		assertEquals(methodNode.getSignature(), "(java.lang.Object...)");
 		assertTrue(methodNode.isVarArgs());
 
-		methodParameterNode = methodNode.getParameters().get(0);
+		methodParameterNode = methodNode.getParameter().get(0);
 		assertEquals(methodParameterNode.getName(), "object");
-		assertEquals(methodParameterNode.getType().getQualifiedName(), "java.lang.Object");
+		assertEquals(methodParameterNode.getType().getQualified(), "java.lang.Object");
 		assertEquals(methodParameterNode.getType().getDimension(), "[]");
 
 		// methodNode9--check var args negative test
@@ -264,9 +264,9 @@ public class MethodTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Method3.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Class classNode = packageNode.getClasses().get(0);
-		List<Method> testMethods = classNode.getMethods();
+		Package packageNode = rootNode.getPackage().get(0);
+		Class classNode = packageNode.getClazz().get(0);
+		List<Method> testMethods = classNode.getMethod();
 
 		// methodNode1 -- we check public scope
 		Method methodNode = findByMethodName("method1", testMethods);
@@ -310,56 +310,56 @@ public class MethodTest extends AbstractTestParent {
 
 		// methodNode9 -- we check one thrown exception
 		methodNode = findByMethodName("method9", testMethods);
-		assertEquals(methodNode.getThrows().size(), 1);
+		assertEquals(methodNode.getException().size(), 1);
 
-		TypeInfo exception = methodNode.getThrows().get(0);
-		assertEquals(exception.getQualifiedName(), "java.lang.Exception");
+		TypeInfo exception = methodNode.getException().get(0);
+		assertEquals(exception.getQualified(), "java.lang.Exception");
 		assertEquals(exception.getDimension(), null);
-		assertEquals(exception.getGenerics().size(), 0);
+		assertEquals(exception.getGeneric().size(), 0);
 		assertNull(exception.getWildcard());
 
 		// methodNode10 -- we check two thrown exceptions
 		methodNode = findByMethodName("method10", testMethods);
-		assertEquals(methodNode.getThrows().size(), 2);
+		assertEquals(methodNode.getException().size(), 2);
 
-		exception = methodNode.getThrows().get(0);
-		assertEquals(exception.getQualifiedName(), "java.lang.OutOfMemoryError");
+		exception = methodNode.getException().get(0);
+		assertEquals(exception.getQualified(), "java.lang.OutOfMemoryError");
 		assertEquals(exception.getDimension(), null);
-		assertEquals(exception.getGenerics().size(), 0);
+		assertEquals(exception.getGeneric().size(), 0);
 
-		exception = methodNode.getThrows().get(1);
-		assertEquals(exception.getQualifiedName(), "java.lang.IllegalArgumentException");
+		exception = methodNode.getException().get(1);
+		assertEquals(exception.getQualified(), "java.lang.IllegalArgumentException");
 		assertEquals(exception.getDimension(), null);
-		assertEquals(exception.getGenerics().size(), 0);
+		assertEquals(exception.getGeneric().size(), 0);
 
 		// negative--no exceptions
-		assertEquals(findByMethodName("method4", testMethods).getThrows().size(), 0);
+		assertEquals(findByMethodName("method4", testMethods).getException().size(), 0);
 
 		// methodNode11 -- 1 annotation instance
 
 		methodNode = findByMethodName("method11", testMethods);
-		assertEquals(methodNode.getAnnotations().size(), 1);
+		assertEquals(methodNode.getAnnotation().size(), 1);
 
-		AnnotationInstance annotation = methodNode.getAnnotations().get(0);
-		assertEquals(annotation.getQualifiedName(), "java.lang.Deprecated");
-		assertEquals(annotation.getArguments().size(), 0);
+		AnnotationInstance annotation = methodNode.getAnnotation().get(0);
+		assertEquals(annotation.getQualified(), "java.lang.Deprecated");
+		assertEquals(annotation.getArgument().size(), 0);
 
 		// methodNode12 -- 2 annotation instances
 		methodNode = findByMethodName("method12", testMethods);
-		assertEquals(methodNode.getAnnotations().size(), 2);
+		assertEquals(methodNode.getAnnotation().size(), 2);
 
-		annotation = methodNode.getAnnotations().get(0);
-		assertEquals(annotation.getQualifiedName(), "java.lang.Deprecated");
+		annotation = methodNode.getAnnotation().get(0);
+		assertEquals(annotation.getQualified(), "java.lang.Deprecated");
 
-		annotation = methodNode.getAnnotations().get(1);
-		assertEquals(annotation.getQualifiedName(), Annotation12.class.getName());
-		assertEquals(annotation.getArguments().size(), 1);
-		AnnotationArgument annotArgument = annotation.getArguments().get(0);
+		annotation = methodNode.getAnnotation().get(1);
+		assertEquals(annotation.getQualified(), Annotation12.class.getName());
+		assertEquals(annotation.getArgument().size(), 1);
+		AnnotationArgument annotArgument = annotation.getArgument().get(0);
 		assertEquals(annotArgument.getName(), "value");
 		assertEquals(annotArgument.getValue().get(0), "java.lang.Warning");
 
 		// negative -- no annotations
-		assertEquals(findByMethodName("method4", testMethods).getAnnotations().size(), 0);
+		assertEquals(findByMethodName("method4", testMethods).getAnnotation().size(), 0);
 
 	}
 

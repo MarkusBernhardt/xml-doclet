@@ -38,24 +38,24 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface1.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertNull(interfaceNode.getComment());
 		assertEquals(interfaceNode.getName(), Interface1.class.getSimpleName());
-		assertEquals(interfaceNode.getQualifiedName(), Interface1.class.getName());
+		assertEquals(interfaceNode.getQualified(), Interface1.class.getName());
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 0);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 0);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 	}
 
@@ -67,25 +67,25 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface2.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
-		Method method = interfaceNode.getMethods().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
+		Method method = interfaceNode.getMethod().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface2");
 		assertEquals(interfaceNode.getName(), Interface2.class.getSimpleName());
-		assertEquals(interfaceNode.getQualifiedName(), Interface2.class.getName());
+		assertEquals(interfaceNode.getQualified(), Interface2.class.getName());
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 1);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 1);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 
 		// verify method
@@ -97,11 +97,11 @@ public class InterfaceTest extends AbstractTestParent {
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
 		assertFalse(method.isVarArgs());
-		assertEquals(method.getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface2.method1");
+		assertEquals(method.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface2.method1");
 		assertEquals(method.getScope(), "public");
-		assertEquals(method.getAnnotations().size(), 0);
-		assertEquals(method.getParameters().size(), 0);
-		assertEquals(method.getThrows().size(), 0);
+		assertEquals(method.getAnnotation().size(), 0);
+		assertEquals(method.getParameter().size(), 0);
+		assertEquals(method.getException().size(), 0);
 
 	}
 
@@ -113,28 +113,28 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface3.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface3");
 		assertEquals(interfaceNode.getName(), Interface3.class.getSimpleName());
-		assertEquals(interfaceNode.getQualifiedName(), Interface3.class.getName());
+		assertEquals(interfaceNode.getQualified(), Interface3.class.getName());
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 0);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 1);
+		assertEquals(interfaceNode.getMethod().size(), 0);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 1);
 		assertTrue(interfaceNode.isIncluded());
 
 		// verify interface
-		assertEquals(interfaceNode.getExtends().get(0).getQualifiedName(), java.io.Serializable.class.getName());
+		assertEquals(interfaceNode.getInterface().get(0).getQualified(), java.io.Serializable.class.getName());
 	}
 
 	/**
@@ -145,32 +145,32 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface4.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
-		AnnotationInstance annotationInstanceNode = interfaceNode.getAnnotations().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
+		AnnotationInstance annotationInstanceNode = interfaceNode.getAnnotation().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface4");
 		assertEquals(interfaceNode.getName(), Interface4.class.getSimpleName());
-		assertEquals(interfaceNode.getQualifiedName(), Interface4.class.getName());
+		assertEquals(interfaceNode.getQualified(), Interface4.class.getName());
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 0);
-		assertEquals(interfaceNode.getAnnotations().size(), 1);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 0);
+		assertEquals(interfaceNode.getAnnotation().size(), 1);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 
 		// verify deprecated annotation
 		// test annotation 'deprecated' on class
-		assertEquals(annotationInstanceNode.getQualifiedName(), "java.lang.Deprecated");
+		assertEquals(annotationInstanceNode.getQualified(), "java.lang.Deprecated");
 		assertEquals(annotationInstanceNode.getName(), "Deprecated");
-		assertEquals(annotationInstanceNode.getArguments().size(), 0);
+		assertEquals(annotationInstanceNode.getArgument().size(), 0);
 	}
 
 	/**
@@ -181,25 +181,25 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface5.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
-		Method method = interfaceNode.getMethods().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
+		Method method = interfaceNode.getMethod().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface5");
 		assertEquals(interfaceNode.getName(), "Interface5");
-		assertEquals(interfaceNode.getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface5");
+		assertEquals(interfaceNode.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface5");
 		assertEquals(interfaceNode.getScope(), "");
-		assertEquals(interfaceNode.getMethods().size(), 1);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 1);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 
 		// verify method
@@ -211,13 +211,13 @@ public class InterfaceTest extends AbstractTestParent {
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
 		assertFalse(method.isVarArgs());
-		assertEquals(method.getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface5.method1");
+		assertEquals(method.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface5.method1");
 
 		// all interface methods are public
 		assertEquals(method.getScope(), "public");
-		assertEquals(method.getAnnotations().size(), 0);
-		assertEquals(method.getParameters().size(), 0);
-		assertEquals(method.getThrows().size(), 0);
+		assertEquals(method.getAnnotation().size(), 0);
+		assertEquals(method.getParameter().size(), 0);
+		assertEquals(method.getException().size(), 0);
 	}
 
 	/**
@@ -228,29 +228,29 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface6.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
-		TypeParameter typeParameterNode = interfaceNode.getGenerics().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
+		TypeParameter typeParameterNode = interfaceNode.getGeneric().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface6");
 		assertEquals(interfaceNode.getName(), "Interface6");
-		assertEquals(interfaceNode.getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface6");
+		assertEquals(interfaceNode.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface6");
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 0);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 0);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 
 		assertEquals(typeParameterNode.getName(), "Fun");
-		assertEquals(typeParameterNode.getBounds().size(), 0);
+		assertEquals(typeParameterNode.getBound().size(), 0);
 	}
 
 	/**
@@ -261,29 +261,29 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface7.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
-		TypeParameter typeParameterNode = interfaceNode.getGenerics().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
+		TypeParameter typeParameterNode = interfaceNode.getGeneric().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface7");
 		assertEquals(interfaceNode.getName(), "Interface7");
-		assertEquals(interfaceNode.getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface7");
+		assertEquals(interfaceNode.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface7");
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 0);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 0);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 
-		assertEquals(typeParameterNode.getBounds().size(), 1);
-		assertEquals(typeParameterNode.getBounds().get(0), "java.lang.Number");
+		assertEquals(typeParameterNode.getBound().size(), 1);
+		assertEquals(typeParameterNode.getBound().get(0), "java.lang.Number");
 	}
 
 	/**
@@ -295,29 +295,29 @@ public class InterfaceTest extends AbstractTestParent {
 		String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/Interface8.java" };
 		Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
 
-		Package packageNode = rootNode.getPackages().get(0);
-		Interface interfaceNode = packageNode.getInterfaces().get(0);
-		TypeParameter typeParameterNode = interfaceNode.getGenerics().get(0);
+		Package packageNode = rootNode.getPackage().get(0);
+		Interface interfaceNode = packageNode.getInterface().get(0);
+		TypeParameter typeParameterNode = interfaceNode.getGeneric().get(0);
 
-		assertEquals(rootNode.getPackages().size(), 1);
+		assertEquals(rootNode.getPackage().size(), 1);
 		assertNull(packageNode.getComment());
 		assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
-		assertEquals(packageNode.getAnnotations().size(), 0);
-		assertEquals(packageNode.getEnums().size(), 0);
-		assertEquals(packageNode.getInterfaces().size(), 1);
-		assertEquals(packageNode.getClasses().size(), 0);
+		assertEquals(packageNode.getAnnotation().size(), 0);
+		assertEquals(packageNode.getEnum().size(), 0);
+		assertEquals(packageNode.getInterface().size(), 1);
+		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(interfaceNode.getComment(), "Interface8");
 		assertEquals(interfaceNode.getName(), "Interface8");
-		assertEquals(interfaceNode.getQualifiedName(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface8");
+		assertEquals(interfaceNode.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Interface8");
 		assertEquals(interfaceNode.getScope(), "public");
-		assertEquals(interfaceNode.getMethods().size(), 0);
-		assertEquals(interfaceNode.getAnnotations().size(), 0);
-		assertEquals(interfaceNode.getExtends().size(), 0);
+		assertEquals(interfaceNode.getMethod().size(), 0);
+		assertEquals(interfaceNode.getAnnotation().size(), 0);
+		assertEquals(interfaceNode.getInterface().size(), 0);
 		assertTrue(interfaceNode.isIncluded());
 
-		assertEquals(typeParameterNode.getBounds().size(), 2);
-		assertEquals(typeParameterNode.getBounds().get(0), "java.lang.Number");
-		assertEquals(typeParameterNode.getBounds().get(1), "java.lang.Runnable");
+		assertEquals(typeParameterNode.getBound().size(), 2);
+		assertEquals(typeParameterNode.getBound().get(0), "java.lang.Number");
+		assertEquals(typeParameterNode.getBound().get(1), "java.lang.Runnable");
 	}
 }
