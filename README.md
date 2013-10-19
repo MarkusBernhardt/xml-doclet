@@ -11,13 +11,23 @@ Usage
 
 If you are using maven you can use this library by adding the following report to your pom.xml:
 
-    <dependency>
-        <groupId>com.github.markusbernhardt</groupId>
-        <artifactId>robotframework-selenium2library-java</artifactId>
-        <version>1.2.0.13</version>
-        <scope>test</scope>
-    </dependency>
-
+    <project>
+    	...
+    			<plugin>
+    				<groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-javadoc-plugin</artifactId>
+    				<executions>
+    					<execution>
+    						<id>xml-doclet</id>
+    						<goals>
+    							<goal>javadoc</goal>
+    						</goals>
+    					</execution>
+    				</executions>
+    			</plugin>
+    	...
+    </project>
+    
 If you cannot use the maven you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.1/xml-doclet-1.0.1-jar-with-dependencies.jar), which contains all required libraries.
 
     javadoc -doclet com.github.markusbernhardt.xmldoclet.XmlDoclet \
