@@ -26,13 +26,11 @@ If you are using maven you can use this library by adding the following report t
     							<doclet>com.github.markusbernhardt.xmldoclet.XmlDoclet</doclet>
     							<additionalparam>-d ${project.build.directory} -filename ${project.artifactId}-${project.version}-javadoc.xml</additionalparam>
     							<useStandardDocletOptions>false</useStandardDocletOptions>
-    							<docletArtifacts>
-    								<docletArtifact>
-    									<groupId>com.github.markusbernhardt</groupId>
-    									<artifactId>xml-doclet</artifactId>
-    									<version>1.0.1</version>
-    								</docletArtifact>
-    							</docletArtifacts>
+    							<docletArtifact>
+    								<groupId>com.github.markusbernhardt</groupId>
+    								<artifactId>xml-doclet</artifactId>
+    								<version>1.0.1</version>
+    							</docletArtifact>
     						</configuration>
 						</execution>
     				</executions>
