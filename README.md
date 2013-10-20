@@ -25,6 +25,7 @@ If you are using maven you can use this library by adding the following report t
     						<configuration>
     							<doclet>com.github.markusbernhardt.xmldoclet.XmlDoclet</doclet>
     							<additionalparam>-d ${project.build.directory} -filename ${project.artifactId}-${project.version}-javadoc.xml</additionalparam>
+    							<useStandardDocletOptions>false</useStandardDocletOptions>
     							<docletArtifacts>
     								<docletArtifact>
     									<groupId>com.github.markusbernhardt</groupId>
@@ -39,7 +40,7 @@ If you are using maven you can use this library by adding the following report t
     	...
     </project>
     
-If you cannot use the maven you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.1/xml-doclet-1.0.1-jar-with-dependencies.jar), which contains all required libraries.
+If you are not using maven, you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.1/xml-doclet-1.0.1-jar-with-dependencies.jar), which contains all required libraries.
 
     javadoc -doclet com.github.markusbernhardt.xmldoclet.XmlDoclet \
     -docletpath xml-doclet-1.0.1-jar-with-dependencies.jar \
