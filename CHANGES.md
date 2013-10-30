@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+1.0.2
+-----
+* Changed the scope of the jar-with-dependencies to 'test'.
+
 1.0.1
 -----
 
