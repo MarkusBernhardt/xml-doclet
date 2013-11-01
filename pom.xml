@@ -9,7 +9,7 @@
 
 	<groupId>com.github.markusbernhardt</groupId>
 	<artifactId>xml-doclet</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>XML Doclet</name>
@@ -64,17 +64,10 @@
 			<version>1.7.5</version>
 		</dependency>
 		<dependency>
-			<!-- use SLF4J with log4j for logging of unit tests -->
+			<!-- use SLF4J-simple for logging of unit tests -->
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<artifactId>slf4j-simple</artifactId>
 			<version>1.7.5</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- use SLF4J with log4j for logging of unit tests -->
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
