@@ -6,6 +6,8 @@ This library provides a doclet to output the javadoc comments from Java source c
 The name, some ideas and most unit tests were shamelessly stolen from the
 [xml-doclet](http://code.google.com/p/xml-doclet) library by Seth Call.
 
+Note that an existing installation of *Oracle JDK 7* is required to use this doclet.
+
 Usage
 -----
 
