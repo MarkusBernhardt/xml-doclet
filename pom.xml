@@ -20,7 +20,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>true</downloadSources>
 		<downloadJavadocs>true</downloadJavadocs>
-		<java.version>1.7</java.version>
+		<java.version>1.6</java.version>
 	</properties>
 
 	<scm>

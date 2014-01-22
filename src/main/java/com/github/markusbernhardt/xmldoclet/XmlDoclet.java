@@ -224,7 +224,7 @@ public class XmlDoclet {
 	 */
 	public static CommandLine parseCommandLine(String[][] optionsArrayArray) {
 		try {
-			List<String> argumentList = new ArrayList<>();
+			List<String> argumentList = new ArrayList<String>();
 			for (String[] optionsArray : optionsArrayArray) {
 				argumentList.addAll(Arrays.asList(optionsArray));
 			}
