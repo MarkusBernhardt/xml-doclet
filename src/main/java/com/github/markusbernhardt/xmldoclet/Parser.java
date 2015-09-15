@@ -163,8 +163,10 @@ public class Parser {
 	/**
 	 * Parses annotation instances of an annotable program element
 	 * 
-	 * @param annotationDocs
-	 *            Annotations decorated on some program element
+	 * @param annotationDesc
+	 *            annotationDesc
+	 * @param programElement
+	 *            programElement
 	 * @return representation of annotations
 	 */
 	protected AnnotationInstance parseAnnotationDesc(AnnotationDesc annotationDesc, String programElement) {
