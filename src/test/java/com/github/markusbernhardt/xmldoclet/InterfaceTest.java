@@ -52,7 +52,7 @@ public class InterfaceTest extends AbstractTestParent {
 		assertEquals(packageNode.getInterface().size(), 1);
 		assertEquals(packageNode.getClazz().size(), 0);
 
-		assertNull(interfaceNode.getComment());
+		assertEquals(interfaceNode.getComment(), "Interface1");
 		assertEquals(interfaceNode.getName(), Interface1.class.getSimpleName());
 		assertEquals(interfaceNode.getQualified(), Interface1.class.getName());
 		assertEquals(interfaceNode.getScope(), "public");

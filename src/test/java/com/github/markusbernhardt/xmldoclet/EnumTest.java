@@ -47,7 +47,7 @@ public class EnumTest extends AbstractTestParent {
 		assertEquals(packageNode.getClazz().size(), 0);
 
 		assertEquals(enumNode.getName(), "Enum1");
-		assertNull(enumNode.getComment());
+		assertEquals(enumNode.getComment(), "Enum1");
 		assertEquals(enumNode.getQualified(), "com.github.markusbernhardt.xmldoclet.simpledata.Enum1");
 		assertEquals(enumNode.getConstant().size(), 3);
 		assertEquals(enumNode.getConstant().get(0).getName(), "a");

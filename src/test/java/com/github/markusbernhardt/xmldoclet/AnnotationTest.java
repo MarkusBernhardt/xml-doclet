@@ -47,7 +47,7 @@ public class AnnotationTest extends AbstractTestParent {
 		assertEquals(packageNode.getInterface().size(), 0);
 		assertEquals(packageNode.getClazz().size(), 0);
 
-		assertEquals(annotationNode.getComment(), null);
+		assertEquals(annotationNode.getComment(), "Annotation1");
 		assertEquals(annotationNode.getName(), Annotation1.class.getSimpleName());
 		assertEquals(annotationNode.getQualified(), Annotation1.class.getName());
 		assertEquals(annotationNode.getScope(), "public");

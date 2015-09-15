@@ -142,7 +142,7 @@ public class Parser {
 	/**
 	 * Parse the elements of an annotation
 	 * 
-	 * @param element
+	 * @param annotationTypeElementDoc
 	 *            A AnnotationTypeElementDoc instance
 	 * @return the annotation element node
 	 */

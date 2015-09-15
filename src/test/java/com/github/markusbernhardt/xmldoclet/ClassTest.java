@@ -63,7 +63,7 @@ public class ClassTest extends AbstractTestParent {
 		assertEquals(packageNode.getInterface().size(), 0);
 		assertEquals(packageNode.getClazz().size(), 1);
 
-		assertNull(classNode.getComment());
+		assertEquals(classNode.getComment(), "Class1");
 		assertEquals(classNode.getName(), Class1.class.getSimpleName());
 		assertEquals(classNode.getQualified(), Class1.class.getName());
 		assertEquals(classNode.getScope(), "public");
