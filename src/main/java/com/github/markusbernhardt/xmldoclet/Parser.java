@@ -292,6 +292,10 @@ public class Parser {
 			interfaceNode.getTag().add(parseTag(tag));
 		}
 
+		for (FieldDoc field : classDoc.fields()) {
+			interfaceNode.getField().add(parseField(field));
+		}
+
 		return interfaceNode;
 	}
 
