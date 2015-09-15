@@ -115,6 +115,8 @@
 				maxOccurs="unbounded" />
 			<xs:element name="annotation" type="annotationInstance"
 				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="field" type="field" minOccurs="0"
+						maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="qualified" type="xs:string" />
