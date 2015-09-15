@@ -4,6 +4,10 @@ CHANGES
 unreleased
 ----------
 
+1.0.5
+-----
+* Added the support for reading javadoc of fields in an Interface. See #6. Thanks to sandeshh!
+
 1.0.4
 -----
 * Make xml-doclet java 1.6 compatible. See #5. Thanks to Jussi Malinen!

@@ -29,7 +29,7 @@ If you are using maven you can use this library by adding the following report t
     							<docletArtifact>
     								<groupId>com.github.markusbernhardt</groupId>
     								<artifactId>xml-doclet</artifactId>
-    								<version>1.0.4</version>
+    								<version>1.0.5</version>
     							</docletArtifact>
     						</configuration>
 						</execution>
@@ -38,13 +38,13 @@ If you are using maven you can use this library by adding the following report t
     	...
     </project>
     
-If you are not using maven, you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.4/xml-doclet-1.0.4-jar-with-dependencies.jar), which contains all required libraries.
+If you are not using maven, you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.5/xml-doclet-1.0.5-jar-with-dependencies.jar), which contains all required libraries.
 
     javadoc -doclet com.github.markusbernhardt.xmldoclet.XmlDoclet \
-    -docletpath xml-doclet-1.0.4-jar-with-dependencies.jar \
+    -docletpath xml-doclet-1.0.5-jar-with-dependencies.jar \
     [Javadoc- and XmlDoclet-Options]
 
-If you want more control and feel adventurous you could you use this [jar](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.4/xml-doclet-1.0.4.jar) and provide all required libraries from this [list](DEPENDENCIES.md) on your own.
+If you want more control and feel adventurous you could you use this [jar](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.5/xml-doclet-1.0.5.jar) and provide all required libraries from this [list](DEPENDENCIES.md) on your own.
 
 Options
 -------
