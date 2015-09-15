@@ -216,7 +216,7 @@ public class XmlDoclet {
 	 * 
 	 * @see com.sun.javadoc.Doclet#languageVersion()
 	 * 
-	 * @return {@value LanguageVersion#JAVA_1_5}
+	 * @return LanguageVersion#JAVA_1_5
 	 */
 	public static LanguageVersion languageVersion() {
 		return LanguageVersion.JAVA_1_5;
