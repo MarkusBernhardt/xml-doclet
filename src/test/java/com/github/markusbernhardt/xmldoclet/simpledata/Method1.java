@@ -4,18 +4,30 @@ package com.github.markusbernhardt.xmldoclet.simpledata;
  * Class1
  */
 public class Method1 {
+	/** Method */
 	public void method1() {
 
 	}
 
+	/**
+	 * Method
+	 * 
+	 * @return ret
+	 */
 	public Integer method2() {
 		return new Integer(0);
 	}
 
+	/**
+	 * Method
+	 * 
+	 * @return ret
+	 */
 	public int method3() {
 		return 0;
 	}
 
+	/** Method */
 	public void method4() {
 
 	}

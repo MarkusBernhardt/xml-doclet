@@ -43,6 +43,12 @@ import com.sun.javadoc.Type;
 import com.sun.javadoc.TypeVariable;
 import com.sun.javadoc.WildcardType;
 
+/**
+ * The main parser class. It scans the given Doclet document root and creates
+ * the XML tree.
+ * 
+ * @author markus
+ */
 public class Parser {
 
 	private final static Logger log = LoggerFactory.getLogger(Parser.class);

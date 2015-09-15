@@ -25,8 +25,8 @@ class LoggingOutputStream extends java.io.OutputStream {
 	 * @param log
 	 *            the Logger to write to
 	 * 
-	 * @param isError
-	 *            the if true write to error, else info
+	 * @param loggingLevel
+	 *            the log level
 	 * 
 	 * @exception IllegalArgumentException
 	 *                if cat == null or priority == null

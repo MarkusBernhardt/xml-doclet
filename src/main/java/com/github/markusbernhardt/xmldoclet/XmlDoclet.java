@@ -31,6 +31,11 @@ import com.sun.javadoc.DocErrorReporter;
 import com.sun.javadoc.LanguageVersion;
 import com.sun.javadoc.RootDoc;
 
+/**
+ * Doclet class.
+ * 
+ * @author markus
+ */
 public class XmlDoclet {
 
 	private final static Logger log = LoggerFactory.getLogger(Parser.class);
@@ -110,7 +115,7 @@ public class XmlDoclet {
 	 * 
 	 * @see com.sun.javadoc.Doclet#validOptions(String[][], DocErrorReporter)
 	 * 
-	 * @param options
+	 * @param optionsArrayArray
 	 *            The two dimensional array of options.
 	 * @param reporter
 	 *            The error reporter.
@@ -128,7 +133,7 @@ public class XmlDoclet {
 	 * 
 	 * @see com.sun.javadoc.Doclet#start(RootDoc)
 	 * 
-	 * @param root
+	 * @param rootDoc
 	 *            The root of the documentation tree.
 	 * 
 	 * @return <code>true</code> if processing was successful.
@@ -145,7 +150,9 @@ public class XmlDoclet {
 	 * Save XML object model to a file via JAXB.
 	 * 
 	 * @param commandLine
+	 *            the parsed command line arguments
 	 * @param root
+	 *            the document root
 	 */
 	public static void save(CommandLine commandLine, Root root) {
 		if (commandLine.hasOption("dryrun")) {
@@ -219,8 +226,8 @@ public class XmlDoclet {
 	 * Parse the given options.
 	 * 
 	 * @param optionsArrayArray
-	 * @return
-	 * @throws ParseException
+	 *            The two dimensional array of options.
+	 * @return the parsed command line arguments.
 	 */
 	public static CommandLine parseCommandLine(String[][] optionsArrayArray) {
 		try {

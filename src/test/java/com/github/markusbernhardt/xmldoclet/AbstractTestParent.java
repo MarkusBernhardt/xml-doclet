@@ -11,6 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import com.github.markusbernhardt.xmldoclet.xjc.Root;
 
+/**
+ * Base class for all tests.
+ * 
+ * @author markus
+ */
 public class AbstractTestParent {
 
 	private final static Logger log = LoggerFactory.getLogger(AbstractTestParent.class);
@@ -52,6 +57,8 @@ public class AbstractTestParent {
 	 *            if you had foo.bar, foo.bar.bar, and bar.foo, specifying 'foo'
 	 *            will process foo.bar and foo.bar.bar packages, but not bar.foo
 	 *            (unless you specify 'bar' as a subpackage, too)
+	 * @param additionalArguments
+	 *            Additional Arguments.
 	 * @return XStream compatible data structure
 	 */
 	public Root executeJavadoc(String extendedClassPath, String[] sourcePaths, String[] packages, String[] sourceFiles,
@@ -126,10 +133,28 @@ public class AbstractTestParent {
 		return XmlDoclet.root;
 	}
 
+	/**
+	 * Helper method to concat strings.
+	 * 
+	 * @param glue
+	 *            the seperator.
+	 * @param strings
+	 *            the strings to concat.
+	 * @return concated string
+	 */
 	public static String join(String glue, String[] strings) {
 		return join(glue, Arrays.asList(strings));
 	}
 
+	/**
+	 * Helper method to concat strings.
+	 * 
+	 * @param glue
+	 *            the seperator.
+	 * @param strings
+	 *            the strings to concat.
+	 * @return concated string
+	 */
 	public static String join(String glue, Iterable<String> strings) {
 		if (strings == null) {
 			return null;

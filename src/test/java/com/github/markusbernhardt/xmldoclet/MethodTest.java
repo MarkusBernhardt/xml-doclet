@@ -22,6 +22,9 @@ import com.github.markusbernhardt.xmldoclet.xjc.Root;
 import com.github.markusbernhardt.xmldoclet.xjc.TypeInfo;
 import com.github.markusbernhardt.xmldoclet.xjc.Wildcard;
 
+/**
+ * Unit test group for Methods
+ */
 public class MethodTest extends AbstractTestParent {
 
 	/**

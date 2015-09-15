@@ -19,6 +19,9 @@ import com.github.markusbernhardt.xmldoclet.xjc.Field;
 import com.github.markusbernhardt.xmldoclet.xjc.Package;
 import com.github.markusbernhardt.xmldoclet.xjc.Root;
 
+/**
+ * Unit test group for Fields
+ */
 public class FieldTest extends AbstractTestParent {
 
 	/**

@@ -18,6 +18,9 @@ import com.github.markusbernhardt.xmldoclet.xjc.Package;
 import com.github.markusbernhardt.xmldoclet.xjc.Root;
 import com.github.markusbernhardt.xmldoclet.xjc.TypeParameter;
 
+/**
+ * Unit test group for Interfaces
+ */
 @SuppressWarnings("deprecation")
 public class InterfaceTest extends AbstractTestParent {
 
