@@ -19,6 +19,7 @@ If you are using maven you can use this library by adding the following report t
     				<executions>
     					<execution>
     						<id>xml-doclet</id>
+						<phase>prepare-package</phase>
     						<goals>
     							<goal>javadoc</goal>
     						</goals>
@@ -38,6 +39,7 @@ If you are using maven you can use this library by adding the following report t
     	...
     </project>
     
+Use 'mvn package' with maven.
 If you are not using maven, you can use the [jar-with-dependencies](http://search.maven.org/remotecontent?filepath=com/github/markusbernhardt/xml-doclet/1.0.5/xml-doclet-1.0.5-jar-with-dependencies.jar), which contains all required libraries.
 
     javadoc -doclet com.github.markusbernhardt.xmldoclet.XmlDoclet \
