@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.github.markusbernhardt.xmldoclet.simpledata.Annotation3;
+import com.github.markusbernhardt.xmldoclet.simpledata.AnnotationCascadeChild;
 import com.github.markusbernhardt.xmldoclet.simpledata.Class1;
 import com.github.markusbernhardt.xmldoclet.simpledata.Class2;
 import com.github.markusbernhardt.xmldoclet.simpledata.Class3;
@@ -16,6 +18,7 @@ import com.github.markusbernhardt.xmldoclet.simpledata.Class6;
 import com.github.markusbernhardt.xmldoclet.simpledata.Class7;
 import com.github.markusbernhardt.xmldoclet.simpledata.Class8;
 import com.github.markusbernhardt.xmldoclet.simpledata.Class9;
+import com.github.markusbernhardt.xmldoclet.simpledata.ClassAnnotationCascade;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationArgument;
 import com.github.markusbernhardt.xmldoclet.xjc.AnnotationInstance;
 import com.github.markusbernhardt.xmldoclet.xjc.Class;
@@ -33,6 +36,80 @@ import com.github.markusbernhardt.xmldoclet.xjc.TypeParameter;
 @SuppressWarnings("deprecation")
 public class ClassTest extends AbstractTestParent {
 
+    /**
+     * Testing nested Annotations
+     * @see ClassAnnotationCascade
+     */
+    @Test
+    public void testClassAnnotationCascade() {
+         String[] sourceFiles = new String[] { "./src/test/java/com/github/markusbernhardt/xmldoclet/simpledata/ClassAnnotationCascade.java" };
+            Root rootNode = executeJavadoc(null, null, null, sourceFiles, null, new String[] { "-dryrun" });
+
+            Package packageNode = rootNode.getPackage().get(0);
+            Class classNode = packageNode.getClazz().get(0);
+
+            assertEquals(rootNode.getPackage().size(), 1);
+            assertEquals(packageNode.getComment(), null);
+            assertEquals(packageNode.getName(), "com.github.markusbernhardt.xmldoclet.simpledata");
+            assertEquals(packageNode.getClazz().size(), 1);
+            assertEquals(packageNode.getEnum().size(), 0);
+            assertEquals(packageNode.getInterface().size(), 0);
+
+            assertEquals("ClassAnnotationCascade", classNode.getComment());
+            assertEquals("ClassAnnotationCascade", classNode.getName());
+            
+            assertEquals(ClassAnnotationCascade.class.getName(), classNode.getQualified());
+            
+            assertEquals(classNode.getAnnotation().size(), 1);
+            AnnotationInstance annotationNode = classNode.getAnnotation().get(0);
+            
+            assertEquals("AnnotationCascade", annotationNode.getName() );
+            assertEquals(1, annotationNode.getArgument().size());
+            
+            AnnotationArgument annotationArgNode = annotationNode.getArgument().get(0);
+
+            // Two nested annotations in child attribute 
+            assertEquals("children", annotationArgNode.getName());
+            assertEquals(0, annotationArgNode.getValue().size());
+            assertEquals(2, annotationArgNode.getAnnotation().size());
+            
+            AnnotationInstance annonNodePrimitive = annotationArgNode.getAnnotation().get(0);
+            AnnotationInstance annonNodeNested = annotationArgNode.getAnnotation().get(1);
+
+            // Equal attribs
+            assertEquals(AnnotationCascadeChild.class.getSimpleName(), annonNodePrimitive.getName());
+            assertEquals(AnnotationCascadeChild.class.getSimpleName(), annonNodeNested.getName());
+            assertEquals(AnnotationCascadeChild.class.getName(), annonNodePrimitive.getQualified());
+            assertEquals(AnnotationCascadeChild.class.getName(), annonNodeNested.getQualified());
+            assertEquals(2, annonNodePrimitive.getArgument().size());
+            assertEquals(2, annonNodeNested.getArgument().size());
+            assertEquals("name", annonNodePrimitive.getArgument().get(0).getName());
+            assertEquals("name", annonNodeNested.getArgument().get(0).getName());
+
+            // Primitive
+            AnnotationArgument annArgNodePrimitive = annonNodePrimitive.getArgument().get(1);
+            assertEquals("dummyData", annArgNodePrimitive.getName());
+            assertEquals("java.lang.String", annArgNodePrimitive.getType().getQualified());
+            assertEquals(0, annArgNodePrimitive.getAnnotation().size());
+            assertEquals(3, annArgNodePrimitive.getValue().size());
+            assertEquals("A", annArgNodePrimitive.getValue().get(0));
+            assertEquals("B", annArgNodePrimitive.getValue().get(1));
+            assertEquals("C", annArgNodePrimitive.getValue().get(2));
+
+            // Nested
+            AnnotationArgument annArgNodeNested = annonNodeNested.getArgument().get(1);
+            assertEquals("subAnnotations", annArgNodeNested.getName());
+            assertEquals(Annotation3.class.getName(), annArgNodeNested.getType().getQualified());
+            assertEquals(3, annArgNodeNested.getAnnotation().size());
+            assertEquals(0, annArgNodeNested.getValue().size());
+            assertEquals(Annotation3.class.getSimpleName(), annArgNodeNested.getAnnotation().get(0).getName());
+            assertEquals(Annotation3.class.getName(), annArgNodeNested.getAnnotation().get(1).getQualified());
+            assertEquals(1, annArgNodeNested.getAnnotation().get(2).getArgument().size());
+
+            assertEquals("666", annArgNodeNested.getAnnotation().get(2).getArgument().get(0).getValue().get(0));
+    }
+    
+    
 	/**
 	 * Rigourous Parser :-)
 	 */
