@@ -193,7 +193,12 @@ public class Parser {
 			Object objValue = elementValuesPair.value().value();
 			if (objValue instanceof AnnotationValue[]) {
 				for (AnnotationValue annotationValue : (AnnotationValue[]) objValue) {
-					annotationArgumentNode.getValue().add(annotationValue.value().toString());
+				    if (annotationValue.value() instanceof AnnotationDesc) {
+                        AnnotationDesc annoDesc = (AnnotationDesc) annotationValue.value();
+                        annotationArgumentNode.getAnnotation().add(parseAnnotationDesc(annoDesc, programElement));
+                    } else {
+                        annotationArgumentNode.getValue().add(annotationValue.value().toString());
+                    }
 				}
 			} else if (objValue instanceof FieldDoc) {
 				annotationArgumentNode.getValue().add(((FieldDoc) objValue).name());

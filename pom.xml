@@ -43,6 +43,13 @@
 			<email>markus.bernhardt@me.com</email>
 		</developer>
 	</developers>
+	
+	<contributors>
+	    <contributor>
+	      <name>Georg Tsakumagos</name>
+	      <email>tsakumagos@gmail.com</email>
+	    </contributor>	
+	</contributors>
 
 	<dependencies>
 		<dependency>
