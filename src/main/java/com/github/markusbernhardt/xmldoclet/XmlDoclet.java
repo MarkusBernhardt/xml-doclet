@@ -158,6 +158,8 @@ public class XmlDoclet {
 		if (commandLine.hasOption("dryrun")) {
 			return;
 		}
+		// for easier comparison between original and new version
+		NewXmlDoclet.sort(root);
 
 		FileOutputStream fileOutputStream = null;
 		BufferedOutputStream bufferedOutputStream = null;
